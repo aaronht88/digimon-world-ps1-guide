@@ -4,66 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="《數碼暴龍世界》PlayStation（PS1）粉絲攻略：養成、訓練、戰鬥、進化、地圖與道具。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
   <title>《數碼暴龍世界》PS 版攻略（Digimon World）</title>
   <style>
     :root {
-      --bg: #0b1220;
-      --bg-soft: #121c2e;
-      --panel: #162338;
-      --panel-2: #1b2b44;
-      --border: #2a4060;
-      --text: #e8eef7;
-      --muted: #9db0c9;
-      --accent: #3ecf8e;
-      --accent-2: #57b6ff;
-      --warn: #ffb454;
-      --danger: #ff7b7b;
-      --gold: #f0d36a;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      --radius: 14px;
+      /* Light DW1 toolset chrome — matches evo.html */
+      --bg: #B8D4E8;
+      --bg-soft: #9BC4DE;
+      --panel: #FFF8E7;
+      --panel-2: #F5ECD7;
+      --border: #6B3E1F;
+      --border-soft: #A67C52;
+      --text: #2A1A0A;
+      --muted: #6B5344;
+      --accent: #E85D04;
+      --accent-2: #7A2E00;
+      --warn: #92400E;
+      --danger: #B71C1C;
+      --gold: #E85D04;
+      --shadow: none;
+      --radius: 8px;
       --max: 980px;
+      --positive: #2E7D32;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Noto Sans TC", "PingFang HK", "Microsoft JhengHei", "Segoe UI", system-ui, sans-serif;
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(62, 207, 142, 0.12), transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, rgba(87, 182, 255, 0.12), transparent 50%),
-        var(--bg);
+      font-family: "IBM Plex Sans", "Noto Sans TC", "PingFang HK", "Microsoft JhengHei", system-ui, sans-serif;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.7;
       font-size: 16px;
     }
 
-    a { color: var(--accent-2); text-decoration: none; }
-    a:hover { text-decoration: underline; color: #8fd0ff; }
+    a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--accent); }
 
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px 64px; }
 
     header.hero {
       padding: 28px 0 18px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 3px solid var(--border);
       margin-bottom: 18px;
     }
     .badge {
       display: inline-block;
       font-size: 12px;
-      letter-spacing: 0.04em;
-      color: #07301d;
-      background: linear-gradient(135deg, var(--accent), #7dffc0);
+      letter-spacing: 0.02em;
+      color: #fff;
+      background: var(--accent);
+      border: 2px solid var(--border);
       padding: 4px 10px;
-      border-radius: 999px;
-      font-weight: 700;
+      border-radius: 2px;
+      font-weight: 600;
       margin-bottom: 10px;
     }
     h1 {
       margin: 0 0 8px;
-      font-size: clamp(1.55rem, 4vw, 2.2rem);
-      line-height: 1.25;
-      color: #f5fbff;
+      font-size: clamp(1.4rem, 3.5vw, 1.85rem);
+      line-height: 1.3;
+      color: var(--text);
+      font-weight: 600;
     }
     .subtitle { color: var(--muted); margin: 0 0 14px; max-width: 48rem; }
     .meta {
@@ -71,23 +76,23 @@
       color: var(--muted); font-size: 13px;
     }
     .chip {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 999px;
+      background: var(--panel-2);
+      border: 2px solid var(--border-soft);
+      border-radius: 2px;
       padding: 4px 10px;
+      font-weight: 500;
     }
 
     nav.toc {
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(11, 18, 32, 0.92);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
+      background: var(--panel);
+      border: 3px solid var(--border);
       border-radius: var(--radius);
       padding: 10px;
       margin: 16px 0 28px;
-      box-shadow: var(--shadow);
+      box-shadow: none;
     }
     nav.toc .nav-title {
       font-size: 12px;
@@ -107,9 +112,9 @@
     nav.toc a {
       display: inline-block;
       padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: #fff;
+      border: 2px solid var(--border-soft);
       color: var(--text);
       font-size: 13px;
       text-decoration: none;
@@ -117,13 +122,13 @@
     nav.toc a:hover,
     nav.toc a.active {
       border-color: var(--accent);
-      color: var(--accent);
+      color: var(--accent-2);
       background: rgba(62, 207, 142, 0.08);
     }
 
     section {
-      background: linear-gradient(180deg, var(--panel), var(--bg-soft));
-      border: 1px solid var(--border);
+      background: var(--panel);
+      border: 2px solid var(--border);
       border-radius: var(--radius);
       padding: 22px 18px;
       margin: 0 0 18px;
@@ -133,7 +138,7 @@
     section h2 {
       margin: 0 0 12px;
       font-size: 1.35rem;
-      color: var(--gold);
+      color: var(--accent);
       border-bottom: 1px solid var(--border);
       padding-bottom: 8px;
     }
@@ -147,20 +152,20 @@
     li { margin: 4px 0; }
     .muted { color: var(--muted); }
     .note {
-      background: rgba(87, 182, 255, 0.08);
+      background: #E8F5E9;
       border-left: 3px solid var(--accent-2);
       padding: 10px 12px;
       border-radius: 0 10px 10px 0;
       margin: 12px 0;
-      color: #d7e9ff;
+      color: var(--text);
     }
     .warn {
-      background: rgba(255, 180, 84, 0.1);
+      background: #FFF8E1;
       border-left: 3px solid var(--warn);
       padding: 10px 12px;
       border-radius: 0 10px 10px 0;
       margin: 12px 0;
-      color: #ffe7c2;
+      color: var(--text);
     }
     .danger-box {
       background: rgba(255, 123, 123, 0.08);
@@ -179,14 +184,14 @@
       border-radius: 10px;
     }
     th, td {
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       padding: 8px 10px;
       text-align: left;
       vertical-align: top;
     }
     th {
-      background: rgba(62, 207, 142, 0.12);
-      color: #d9ffe9;
+      background: var(--panel-2);
+      color: var(--text);
       font-weight: 700;
     }
     tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
@@ -198,7 +203,7 @@
     }
     .card {
       background: var(--panel-2);
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       border-radius: 12px;
       padding: 12px 14px;
     }
@@ -211,7 +216,7 @@
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       background: rgba(0, 0, 0, 0.35);
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       border-radius: 6px;
       padding: 1px 6px;
       font-size: 0.9em;
@@ -230,7 +235,7 @@
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       background: rgba(22, 35, 56, 0.95);
       color: var(--accent);
       font-size: 18px;
