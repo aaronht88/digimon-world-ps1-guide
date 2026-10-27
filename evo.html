@@ -7,10 +7,9 @@
   <title>進化參考互動機｜《數碼暴龍世界》PS1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     :root {
-      /* Framed-sheet proportions + Digimon World face */
       --ground: #D4E5F2;
       --ground-deep: #B5CDE0;
       --grass: #6B9E3E;
@@ -20,7 +19,7 @@
       --active: #E8E0D0;
       --border: #6B3E1F;
       --border-soft: #A67C52;
-      --rule: #DDD4C4;
+      --rule: #CDBFA8;
       --control: #C4A574;
       --text: #2A1A0A;
       --muted: #6B5344;
@@ -30,64 +29,75 @@
       --mp: #00838F;
       --negative: #B71C1C;
       --warning: #92400E;
-      --chart-1: #E85D04;
       --hp-bar: #43A047;
       --mp-bar: #26C6DA;
-      --radius-card: 4px;
-      --radius-control: 4px;
-      --radius-sheet: 8px;
-      --sheet-inset: 10px;
-      --gap: 20px;
-      --pad: 20px;
-      --control-height: 34px;
-      --fs-title: 24px;
-      --fs-section: 16px;
-      --fs-kpi: 26px;
+      --radius-card: 0;
+      --radius-control: 0;
+      --radius-sheet: 0;
+      --gap: 16px;
+      --pad: 16px;
+      --control-height: 36px;
+      --fs-title: 22px;
+      --fs-section: 15px;
       --fs-body: 14px;
       --fs-small: 12px;
-      --max: 1080px;
+      --fs-pixel: 9px;
+      --max: 1180px;
       --frame-thick: 4px;
+      --shadow-hard: 4px 4px 0 var(--border);
+      --line: #A67C52;
+      --line-hi: #E85D04;
+      --line-rel: #00838F;
     }
     * { box-sizing: border-box; }
     button, input, select, textarea { font-family: inherit; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "IBM Plex Sans", "Noto Sans TC", "PingFang HK", "Microsoft JhengHei", system-ui, sans-serif;
+      font-family: "Noto Sans TC", "PingFang HK", "Microsoft JhengHei", system-ui, sans-serif;
       background: var(--ground);
       color: var(--text);
       line-height: 1.55;
       font-size: var(--fs-body);
       min-height: 100vh;
+      image-rendering: auto;
     }
-    /* File Island grass strip at bottom — flat, no gradient */
     body::before {
       content: "";
       position: fixed;
       left: 0; right: 0; bottom: 0;
-      height: 36px;
-      background: var(--grass);
-      border-top: 4px solid var(--grass-deep);
+      height: 28px;
+      background:
+        repeating-linear-gradient(90deg, var(--grass) 0 10px, var(--grass-deep) 10px 12px),
+        var(--grass);
+      border-top: 4px solid var(--border);
       pointer-events: none;
       z-index: 0;
     }
-    a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
+    .pixel {
+      font-family: "Press Start 2P", monospace;
+      font-size: var(--fs-pixel);
+      line-height: 1.6;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    a { color: var(--accent-ink); text-decoration: none; border-bottom: 2px solid var(--accent); }
     a:hover { color: var(--accent); }
     .app-frame {
       position: relative;
       z-index: 1;
-      max-width: calc(var(--max) + 48px);
+      max-width: calc(var(--max) + 40px);
       margin: 0 auto;
-      padding: 12px 12px 72px;
+      padding: 12px 12px 64px;
       min-height: 100vh;
     }
     .sheet {
       background: var(--surface);
       border: var(--frame-thick) solid var(--border);
-      border-radius: var(--radius-sheet);
-      padding: 0;
-      outline: 2px solid var(--border-soft);
-      outline-offset: -8px;
+      border-radius: 0;
+      box-shadow: var(--shadow-hard);
+      outline: 3px solid var(--border-soft);
+      outline-offset: -10px;
     }
     .topbar {
       display: flex;
@@ -95,116 +105,112 @@
       gap: 12px;
       flex-wrap: wrap;
       min-height: 48px;
-      padding: 10px 18px;
+      padding: 10px 16px;
       background: var(--raised);
-      border-bottom: 3px solid var(--border);
+      border-bottom: 4px solid var(--border);
     }
     .topbar .mark {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-weight: 600;
-      font-size: var(--fs-small);
       color: var(--accent-ink);
-      letter-spacing: 0.02em;
     }
     .topbar .mark .orb {
-      width: 14px; height: 14px;
+      width: 12px; height: 12px;
       background: var(--accent);
       border: 2px solid var(--border);
-      border-radius: 2px;
       flex-shrink: 0;
+      box-shadow: 2px 2px 0 var(--border);
     }
     .topbar .nav-home {
       margin-left: auto;
-      font-size: var(--fs-small);
-      color: var(--muted);
-      text-decoration: none;
-      border: 2px solid var(--border-soft);
+      color: var(--text);
+      border: 3px solid var(--border);
       background: var(--surface);
-      padding: 4px 10px;
-      border-radius: var(--radius-control);
-      font-weight: 500;
+      padding: 6px 10px;
+      font-weight: 700;
+      border-bottom-width: 0;
+      box-shadow: 2px 2px 0 var(--border);
     }
-    .topbar .nav-home:hover { border-color: var(--accent); color: var(--accent-ink); }
+    .topbar .nav-home:hover { background: #FFF3E0; color: var(--accent-ink); }
     .hero {
-      padding: 18px 22px 14px;
-      border-bottom: 2px solid var(--rule);
+      padding: 16px 18px 12px;
+      border-bottom: 3px solid var(--border);
+      background:
+        linear-gradient(var(--rule) 2px, transparent 2px) 0 100%/8px 8px repeat-x,
+        var(--surface);
     }
     .badge {
       display: inline-block;
-      font-size: var(--fs-small);
       color: #F7F3EA;
       background: var(--border);
-      border: 2px solid var(--border);
-      border-left: 6px solid var(--accent);
-      padding: 3px 10px;
-      border-radius: 2px;
-      font-weight: 600;
-      margin-bottom: 8px;
+      border: 3px solid var(--border);
+      border-left: 8px solid var(--accent);
+      padding: 6px 10px;
+      margin-bottom: 10px;
+      box-shadow: 3px 3px 0 var(--accent);
     }
     h1 {
-      margin: 0 0 6px;
+      margin: 0 0 8px;
       font-size: var(--fs-title);
-      line-height: 1.3;
-      font-weight: 600;
+      line-height: 1.35;
+      font-weight: 700;
       color: var(--text);
     }
-    .subtitle { color: var(--muted); margin: 0 0 10px; max-width: 52rem; font-size: var(--fs-body); }
+    .subtitle { color: var(--muted); margin: 0 0 10px; max-width: 52rem; }
     .meta { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: var(--fs-small); }
     .chip {
       background: var(--raised);
-      border: 2px solid var(--border-soft);
-      border-radius: 2px;
-      padding: 3px 8px;
+      border: 2px solid var(--border);
+      padding: 4px 8px;
       font-weight: 500;
+      box-shadow: 2px 2px 0 var(--border-soft);
     }
     .tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 0;
       margin: 0;
-      padding: 0 14px;
+      padding: 0 10px;
       position: sticky;
       top: 0;
       z-index: 30;
-      background: var(--surface);
-      border-bottom: 3px solid var(--border);
+      background: var(--raised);
+      border-bottom: 4px solid var(--border);
     }
     .tabs button {
       appearance: none;
-      border: none;
+      border: 3px solid transparent;
+      border-bottom: none;
       background: transparent;
       color: var(--muted);
       border-radius: 0;
-      padding: 12px 16px 10px;
+      padding: 12px 14px 10px;
       font: inherit;
       font-size: var(--fs-body);
-      font-weight: 500;
+      font-weight: 700;
       cursor: pointer;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -3px;
+      margin-bottom: -4px;
     }
-    .tabs button:hover { color: var(--text); }
+    .tabs button:hover { color: var(--text); background: var(--surface); }
     .tabs button.active {
       color: var(--accent-ink);
-      border-bottom-color: var(--accent);
-      font-weight: 600;
+      background: var(--surface);
+      border-color: var(--border);
+      border-bottom: 4px solid var(--surface);
+      box-shadow: inset 0 -4px 0 var(--accent);
     }
     .panel-block {
       background: var(--surface);
-      border: none;
-      border-radius: 0;
       padding: var(--pad);
       margin: 0;
-      box-shadow: none;
     }
     .panel-block h2 {
       margin: 0 0 12px;
       font-size: var(--fs-section);
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text);
-      border-bottom: 2px solid var(--rule);
+      border-bottom: 3px solid var(--border);
       padding-bottom: 8px;
       display: flex;
       align-items: center;
@@ -212,172 +218,274 @@
     }
     .panel-block h2::before {
       content: "";
-      width: 10px; height: 10px;
+      width: 12px; height: 12px;
       background: var(--accent);
       border: 2px solid var(--border);
+      box-shadow: 2px 2px 0 var(--border);
       flex-shrink: 0;
     }
     .panel-block h3 {
       margin: 14px 0 8px;
       font-size: var(--fs-body);
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent-ink);
     }
     .muted { color: var(--muted); }
     .note {
       background: #E8F5E9;
-      border: 2px solid var(--positive);
-      border-left-width: 6px;
+      border: 3px solid var(--positive);
+      border-left-width: 8px;
       padding: 10px 12px;
-      border-radius: var(--radius-card);
       margin: 10px 0;
-      color: var(--text);
-      font-size: var(--fs-body);
+      box-shadow: 3px 3px 0 var(--border);
     }
     .warn {
       background: #FFF8E1;
-      border: 2px solid var(--warning);
-      border-left-width: 6px;
+      border: 3px solid var(--warning);
+      border-left-width: 8px;
       padding: 10px 12px;
-      border-radius: var(--radius-card);
       margin: 10px 0;
-      color: var(--text);
-      font-size: var(--fs-body);
+      box-shadow: 3px 3px 0 var(--border);
     }
     .toolbar {
-      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
-      margin: 0 0 14px;
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      margin: 0 0 12px;
     }
     .toolbar input[type="search"],
     .form-grid input,
     .form-grid select {
       background: #fff;
-      border: 2px solid var(--border-soft);
+      border: 3px solid var(--border);
       color: var(--text);
-      border-radius: var(--radius-control);
+      border-radius: 0;
       padding: 7px 10px;
       font: inherit;
       font-size: var(--fs-body);
       height: var(--control-height);
+      box-shadow: 2px 2px 0 var(--border-soft);
     }
     .toolbar input[type="search"]:focus,
     .form-grid input:focus,
     .form-grid select:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 1px;
+      outline: none;
       border-color: var(--accent);
+      box-shadow: 3px 3px 0 var(--accent);
     }
-    .toolbar input[type="search"] { flex: 1; min-width: 180px; }
-    .stage-row { margin: 0 0 18px; }
-    .stage-label {
+    .toolbar input[type="search"] { flex: 1; min-width: 160px; }
+    .style-toggle {
+      display: inline-flex;
+      border: 3px solid var(--border);
+      background: var(--raised);
+      box-shadow: 2px 2px 0 var(--border);
+      padding: 0;
+    }
+    .style-toggle button {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      padding: 8px 10px;
+      font: inherit;
       font-size: var(--fs-small);
-      font-weight: 600;
-      color: #fff;
-      background: var(--border);
-      display: inline-block;
-      padding: 4px 12px;
-      margin: 0 0 10px;
-      border-radius: 2px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      border-left: 4px solid var(--accent);
+      font-weight: 700;
+      cursor: pointer;
+      border-right: 2px solid var(--border);
     }
-    .digi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 10px;
+    .style-toggle button:last-child { border-right: none; }
+    .style-toggle button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ===== Column evolution chart ===== */
+    .chart-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      border: 4px solid var(--border);
+      background:
+        linear-gradient(180deg, #C8DFF0 0 42%, #D4E5F2 42% 68%, #B7D48A 68% 82%, #6B9E3E 82% 100%);
+      box-shadow: inset 0 0 0 3px var(--border-soft), var(--shadow-hard);
+      -webkit-overflow-scrolling: touch;
+    }
+    .chart-board {
+      position: relative;
+      min-width: 980px;
+      padding: 12px 10px 18px;
+    }
+    .chart-cols {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      position: relative;
+      z-index: 2;
+    }
+    .stage-col {
+      flex: 1 1 0;
+      min-width: 148px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .stage-label {
+      font-family: "Press Start 2P", monospace;
+      font-size: 8px;
+      line-height: 1.5;
+      text-align: center;
+      color: #F7F3EA;
+      background: var(--border);
+      padding: 8px 6px;
+      border: 3px solid var(--border);
+      border-bottom: 3px solid var(--accent);
+      box-shadow: 3px 3px 0 var(--accent);
+      text-transform: uppercase;
+    }
+    .stage-label .zh {
+      display: block;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+      text-transform: none;
+    }
+    .stage-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .digi-card {
       appearance: none;
-      border: 3px solid var(--border-soft);
+      border: 3px solid var(--border);
       background: #fff;
-      border-radius: var(--radius-card);
-      padding: 10px 6px 8px;
+      border-radius: 0;
+      padding: 8px 6px 6px;
       cursor: pointer;
       color: var(--text);
       text-align: center;
-      transition: border-color .12s, background .12s;
+      box-shadow: 3px 3px 0 var(--border-soft);
+      width: 100%;
     }
-    .digi-card:hover { border-color: var(--accent); background: var(--raised); }
+    .digi-card:hover {
+      border-color: var(--accent);
+      background: #FFF8F0;
+      box-shadow: 3px 3px 0 var(--accent);
+    }
     .digi-card.active {
       border-color: var(--accent);
-      background: #FFF3E0;
-      box-shadow: inset 0 0 0 1px var(--accent);
+      background: #FFE8D0;
+      box-shadow: 4px 4px 0 var(--accent);
     }
-    .digi-card.dim { opacity: 0.32; }
+    .digi-card.dim { opacity: 0.28; }
     .digi-card.related {
       opacity: 1;
       border-color: var(--mp);
       background: #E0F7FA;
+      box-shadow: 3px 3px 0 var(--mp);
     }
+    .digi-card.hidden-filter { display: none !important; }
     .thumb {
-      width: 56px; height: 56px; margin: 0 auto 8px;
+      width: 48px; height: 48px; margin: 0 auto 6px;
       display: flex; align-items: center; justify-content: center;
       background: #1a1208;
-      border: 2px solid var(--border);
-      border-radius: 2px;
+      border: 3px solid var(--border);
       overflow: hidden;
       image-rendering: pixelated;
-      box-shadow: inset 0 0 0 1px var(--border-soft);
+      image-rendering: crisp-edges;
+      box-shadow: inset 2px 2px 0 #0006;
+    }
+    body[data-sprite="art"] .thumb {
+      background: #0d0a06;
     }
     .thumb img {
-      width: 56px; height: 56px;
+      width: 48px; height: 48px;
       object-fit: contain;
       image-rendering: pixelated;
+      image-rendering: crisp-edges;
     }
     .thumb .fb {
       width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 600; font-size: 14px; color: var(--accent-ink);
+      font-weight: 700; font-size: 12px; color: var(--accent-ink);
       background: var(--raised);
-      border: 2px solid var(--border-soft);
     }
-    .digi-card .name { font-size: var(--fs-small); font-weight: 600; line-height: 1.3; }
+    .digi-card .name { font-size: var(--fs-small); font-weight: 700; line-height: 1.25; }
     .digi-card .en {
-      font-size: var(--fs-small);
+      font-family: "Press Start 2P", monospace;
+      font-size: 7px;
       color: var(--muted);
-      font-family: "IBM Plex Sans", system-ui, sans-serif;
-      font-variant-numeric: tabular-nums;
+      line-height: 1.4;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: 100%;
+      margin-top: 2px;
     }
+    .chart-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    .chart-lines path {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 2;
+      stroke-linecap: square;
+      opacity: 0.55;
+    }
+    .chart-lines path.hi {
+      stroke: var(--line-hi);
+      stroke-width: 3;
+      opacity: 1;
+    }
+    .chart-lines path.rel {
+      stroke: var(--line-rel);
+      stroke-width: 2.5;
+      opacity: 0.95;
+    }
+    .chart-lines path.dim {
+      opacity: 0.12;
+    }
+
     .detail {
       display: none;
       margin-top: 14px;
-      border: var(--frame-thick) solid var(--border);
-      border-radius: var(--radius-card);
+      border: 4px solid var(--border);
       background: var(--raised);
       padding: 14px 16px;
-      outline: 1px solid var(--border-soft);
-      outline-offset: -6px;
+      box-shadow: var(--shadow-hard);
+      outline: 2px solid var(--border-soft);
+      outline-offset: -8px;
     }
     .detail.show { display: block; }
     .detail-head {
       display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
       margin-bottom: 10px;
     }
-    .detail-head .thumb { width: 72px; height: 72px; margin: 0; }
-    .detail-head .thumb img { width: 72px; height: 72px; }
+    .detail-head .thumb { width: 64px; height: 64px; margin: 0; }
+    .detail-head .thumb img { width: 64px; height: 64px; }
     .path-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; }
     .path-chip {
       display: inline-flex; align-items: center; gap: 6px;
       background: #fff;
-      border: 2px solid var(--border-soft);
-      border-radius: 2px;
+      border: 3px solid var(--border);
       padding: 4px 10px 4px 4px;
       cursor: pointer;
       font-size: var(--fs-small);
       color: var(--text);
       font-family: inherit;
+      box-shadow: 2px 2px 0 var(--border-soft);
     }
-    .path-chip:hover { border-color: var(--accent); }
+    .path-chip:hover { border-color: var(--accent); box-shadow: 2px 2px 0 var(--accent); }
     .path-chip img {
       width: 28px; height: 28px;
-      border-radius: 0;
-      background: transparent;
+      background: #1a1208;
+      border: 2px solid var(--border);
       image-rendering: pixelated;
+      image-rendering: crisp-edges;
     }
     .req-table {
       width: 100%;
@@ -387,7 +495,7 @@
       font-variant-numeric: tabular-nums;
     }
     .req-table th, .req-table td {
-      border: 2px solid var(--border-soft);
+      border: 2px solid var(--border);
       padding: 7px 10px;
       text-align: left;
       vertical-align: top;
@@ -395,9 +503,8 @@
     .req-table th {
       background: var(--active);
       color: var(--text);
-      font-weight: 600;
+      font-weight: 700;
       width: 7em;
-      font-family: "IBM Plex Sans", "Noto Sans TC", system-ui, sans-serif;
       font-size: var(--fs-small);
     }
     .form-grid {
@@ -407,8 +514,8 @@
       margin: 10px 0;
       padding: 14px;
       background: var(--raised);
-      border: 3px solid var(--border);
-      border-radius: var(--radius-card);
+      border: 4px solid var(--border);
+      box-shadow: var(--shadow-hard);
     }
     .form-grid label {
       display: flex; flex-direction: column; gap: 4px;
@@ -416,53 +523,49 @@
       font-weight: 500;
       color: var(--muted);
     }
-    .form-grid input, .form-grid select {
-      font-family: "IBM Plex Sans", "Noto Sans TC", system-ui, sans-serif;
-      font-variant-numeric: tabular-nums;
-    }
     .btn {
       appearance: none;
       border: 3px solid var(--border);
       background: var(--accent);
       color: #fff;
-      font-weight: 600;
-      border-radius: var(--radius-control);
-      padding: 8px 16px;
+      font-weight: 700;
+      border-radius: 0;
+      padding: 8px 14px;
       font: inherit;
       font-size: var(--fs-body);
       cursor: pointer;
-      box-shadow: none;
+      box-shadow: 3px 3px 0 var(--border);
     }
-    .btn:hover { filter: brightness(1.05); }
+    .btn:hover { background: #ff6d14; }
+    .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--border); }
     .btn.secondary {
       background: var(--surface);
       color: var(--text);
-      border: 2px solid var(--border-soft);
+      border: 3px solid var(--border);
     }
-    .btn.secondary:hover { border-color: var(--accent); color: var(--accent-ink); }
+    .btn.secondary:hover { border-color: var(--accent); color: var(--accent-ink); background: #FFF3E0; }
     .results { display: grid; gap: 10px; margin-top: 14px; }
     .result-card {
-      border: 3px solid var(--border-soft);
-      border-radius: var(--radius-card);
+      border: 3px solid var(--border);
       background: #fff;
       padding: 12px;
+      box-shadow: 3px 3px 0 var(--border-soft);
     }
-    .result-card.ok { border-color: var(--positive); background: #F1F8E9; }
-    .result-card.near { border-color: var(--warning); background: #FFFDE7; }
+    .result-card.ok { border-color: var(--positive); background: #F1F8E9; box-shadow: 3px 3px 0 var(--positive); }
+    .result-card.near { border-color: var(--warning); background: #FFFDE7; box-shadow: 3px 3px 0 var(--warning); }
     .result-card.fail { opacity: 0.85; }
     .result-top {
       display: flex; gap: 10px; align-items: center; margin-bottom: 8px;
     }
-    .result-top .thumb { margin: 0; width: 56px; height: 56px; }
-    .result-top .thumb img { width: 56px; height: 56px; }
-    .pass { color: var(--positive); font-weight: 600; }
-    .failc { color: var(--negative); font-weight: 600; }
+    .result-top .thumb { margin: 0; width: 48px; height: 48px; }
+    .result-top .thumb img { width: 48px; height: 48px; }
+    .pass { color: var(--positive); font-weight: 700; }
+    .failc { color: var(--negative); font-weight: 700; }
     .crit-list { list-style: none; margin: 0; padding: 0; font-size: var(--fs-body); font-variant-numeric: tabular-nums; }
     .crit-list li {
       display: flex; justify-content: space-between; gap: 8px;
       padding: 5px 0;
-      border-bottom: 1px dashed var(--rule);
-      font-family: "IBM Plex Sans", "Noto Sans TC", system-ui, sans-serif;
+      border-bottom: 2px dashed var(--rule);
       font-size: var(--fs-small);
     }
     .hidden { display: none !important; }
@@ -472,45 +575,38 @@
       font-size: var(--fs-small);
       text-align: center;
       padding: 16px 12px 20px;
-      border-top: 2px solid var(--rule);
+      border-top: 4px solid var(--border);
       background: var(--raised);
     }
     ol, ul { padding-left: 1.3em; }
     ol li, ul li { margin: 0.35em 0; }
     @media (max-width: 640px) {
-      .app-frame { padding: 0 0 64px; }
-      .sheet {
-        border-radius: 0;
-        border-left-width: 0;
-        border-right-width: 0;
-        outline: none;
-      }
-      .hero { padding: 14px 16px 12px; }
-      .topbar { padding: 10px 16px; }
-      .panel-block { padding: 14px 16px; }
-      .tabs { padding: 0 8px; }
-      .digi-grid { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; }
-      .digi-card { padding: 8px 4px 6px; overflow: hidden; }
-      .thumb, .thumb img { width: 48px; height: 48px; }
-      h1 { font-size: 20px; }
-      .tabs button { padding: 10px 12px 8px; font-size: var(--fs-small); }
-      footer.page-foot { padding: 14px 16px 18px; }
+      .app-frame { padding: 0 0 56px; }
+      .sheet { box-shadow: none; outline-offset: -6px; }
+      .hero { padding: 14px 14px 12px; }
+      .topbar { padding: 10px 14px; }
+      .panel-block { padding: 12px 12px; }
+      .tabs { padding: 0 6px; }
+      .chart-board { min-width: 900px; }
+      .stage-col { min-width: 132px; }
+      .thumb, .thumb img { width: 40px; height: 40px; }
+      h1 { font-size: 18px; }
+      .tabs button { padding: 10px 10px 8px; font-size: var(--fs-small); }
     }
-
   </style>
 </head>
-<body>
+<body data-sprite="pixel">
   <div class="app-frame">
     <div class="sheet">
     <div class="topbar">
-      <div class="mark"><span class="orb" aria-hidden="true"></span> PS1 · Digimon World · File Island</div>
+      <div class="mark pixel"><span class="orb" aria-hidden="true"></span> PS1 · DIGIMON WORLD</div>
       <a class="nav-home" href="./index.html">← 主攻略</a>
     </div>
     <header class="hero">
-      <div class="badge">進化狀態選單 · STATUS / EVOLUTION</div>
+      <div class="badge pixel">STATUS / EVOLUTION</div>
       <h1>進化參考互動機</h1>
       <p class="subtitle">
-        完整進化圖（縮圖可點）＋數值推算：輸入目前 Digimon 與能力，按《數碼暴龍世界》PS1 自然進化規則推論可能進化對象。
+        完整進化圖（時期分欄＋進化線）＋數值推算：輸入目前 Digimon 與能力，按《數碼暴龍世界》PS1 自然進化規則推論可能進化對象。
       </p>
       <div class="meta">
         <span class="chip">繁體中文（香港）</span>
@@ -530,10 +626,19 @@
       <h2>進化圖</h2>
       <div class="toolbar">
         <input type="search" id="chartSearch" placeholder="搜尋中文／英文名…" autocomplete="off" />
+        <div class="style-toggle" role="group" aria-label="Sprite 風格">
+          <button type="button" id="stylePixel" class="active" title="傳統點陣圖">點陣</button>
+          <button type="button" id="styleArt" title="Wikimon Digimon World 插畫">插畫</button>
+        </div>
         <button type="button" class="btn secondary" id="clearHighlight">清除高亮</button>
       </div>
-      <div class="note">點選任一數碼獸可查看進化需求、前階／後階；相關路線會高亮。</div>
-      <div id="chartRoot"></div>
+      <div class="note">時期由左至右分欄；同一時期由上而下排列。實線連接 <code>evolvesTo</code>。點選可看需求並高亮相關路線。</div>
+      <div class="chart-scroll" id="chartScroll">
+        <div class="chart-board" id="chartBoard">
+          <svg class="chart-lines" id="chartLines" aria-hidden="true"></svg>
+          <div class="chart-cols" id="chartRoot"></div>
+        </div>
+      </div>
       <div class="detail" id="detailPanel"></div>
     </section>
 
@@ -585,7 +690,7 @@
 
     <footer class="page-foot">
       粉絲參考工具，非官方；進化以遊戲內實際判定為準。<br />
-      Sprites：Wikimon Digimon World 圖庫（縮圖本地化）。資料來源標註於「判定規則」。
+      點陣：Wikimon Digital Monster Ver.S／Championship／RPG 等；插畫：Wikimon Digimon World 圖庫（本地化）。
     </footer>
     </div>
   </div>
@@ -594,28 +699,46 @@
   (() => {
     const STAGE_ORDER = ["fresh","inTraining","rookie","champion","ultimate"];
     const STAGE_LABEL = {
-      fresh: "幼年期Ⅰ Fresh",
-      inTraining: "幼年期Ⅱ In-Training",
-      rookie: "成長期 Rookie",
-      champion: "成熟期 Champion",
-      ultimate: "完全體 Ultimate",
+      fresh: { zh: "幼年期Ⅰ", en: "Fresh" },
+      inTraining: { zh: "幼年期Ⅱ", en: "In-Training" },
+      rookie: { zh: "成長期", en: "Rookie" },
+      champion: { zh: "成熟期", en: "Champion" },
+      ultimate: { zh: "完全體", en: "Ultimate" },
     };
     let DB = null;
     let byId = {};
     let selectedId = null;
+    let hoverId = null;
+    let spriteStyle = localStorage.getItem("dwSpriteStyle") || "pixel";
+    let chartFilter = "";
+    let lineDrawTimer = null;
 
     const $ = (s) => document.querySelector(s);
 
+    function setSpriteStyle(style) {
+      spriteStyle = style === "art" ? "art" : "pixel";
+      localStorage.setItem("dwSpriteStyle", spriteStyle);
+      document.body.dataset.sprite = spriteStyle;
+      $("#stylePixel").classList.toggle("active", spriteStyle === "pixel");
+      $("#styleArt").classList.toggle("active", spriteStyle === "art");
+      // refresh visible thumbs without full rebuild when possible
+      document.querySelectorAll("img[data-sprite-id]").forEach(img => {
+        const id = img.dataset.spriteId;
+        img.src = spriteUrl(id);
+      });
+    }
+
     function spriteUrl(id) {
-      return `assets/sprites/${id}.png`;
+      return `assets/sprites/${spriteStyle}/${id}.png`;
     }
 
     function thumbHTML(id, size) {
       const d = byId[id];
       const label = d ? (d.zh || d.en) : id;
       const initials = (d?.en || id).slice(0, 2).toUpperCase();
-      return `<div class="thumb" style="${size?`width:${size}px;height:${size}px`:''}">
-        <img src="${spriteUrl(id)}" alt="${label}" width="${size||48}" height="${size||48}"
+      const s = size || 48;
+      return `<div class="thumb" style="width:${s}px;height:${s}px">
+        <img data-sprite-id="${id}" src="${spriteUrl(id)}" alt="${label}" width="${s}" height="${s}"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
         <div class="fb" style="display:none">${initials}</div>
       </div>`;
@@ -646,34 +769,118 @@
       return parts.length ? parts.join("　或　") + "（滿足其一即可）" : "—";
     }
 
-    function renderChart(filter = "") {
+    function matchesFilter(d, q) {
+      if (!q) return true;
+      return (d.zh + d.en + d.id).toLowerCase().includes(q);
+    }
+
+    function renderChart(filter = chartFilter) {
+      chartFilter = filter;
       const root = $("#chartRoot");
       const q = filter.trim().toLowerCase();
       root.innerHTML = "";
+
       for (const stage of STAGE_ORDER) {
-        const list = DB.digimon.filter(d => d.stage === stage).filter(d => {
-          if (!q) return true;
-          return (d.zh + d.en + d.id).toLowerCase().includes(q);
-        });
-        if (!list.length) continue;
-        const row = document.createElement("div");
-        row.className = "stage-row";
-        row.innerHTML = `<div class="stage-label">${STAGE_LABEL[stage]}</div>`;
-        const grid = document.createElement("div");
-        grid.className = "digi-grid";
+        const list = DB.digimon.filter(d => d.stage === stage);
+        const col = document.createElement("div");
+        col.className = "stage-col";
+        col.dataset.stage = stage;
+        const lab = STAGE_LABEL[stage];
+        col.innerHTML = `<div class="stage-label"><span class="zh">${lab.zh}</span>${lab.en}</div>`;
+        const stack = document.createElement("div");
+        stack.className = "stage-stack";
         for (const d of list) {
           const btn = document.createElement("button");
           btn.type = "button";
           btn.className = "digi-card";
           btn.dataset.id = d.id;
+          if (!matchesFilter(d, q)) btn.classList.add("hidden-filter");
           btn.innerHTML = `${thumbHTML(d.id)}<div class="name">${d.zh}</div><div class="en">${d.en}</div>`;
           btn.addEventListener("click", () => selectDigimon(d.id));
-          grid.appendChild(btn);
+          btn.addEventListener("mouseenter", () => { hoverId = d.id; styleLines(); });
+          btn.addEventListener("mouseleave", () => { hoverId = null; styleLines(); });
+          stack.appendChild(btn);
         }
-        row.appendChild(grid);
-        root.appendChild(row);
+        col.appendChild(stack);
+        root.appendChild(col);
       }
       applyHighlight();
+      requestAnimationFrame(() => drawLines());
+    }
+
+    function nodeCenter(el, boardRect) {
+      const r = el.getBoundingClientRect();
+      return {
+        x: r.left - boardRect.left + r.width / 2,
+        y: r.top - boardRect.top + r.height / 2,
+        left: r.left - boardRect.left,
+        right: r.left - boardRect.left + r.width,
+        top: r.top - boardRect.top,
+        bottom: r.top - boardRect.top + r.height,
+      };
+    }
+
+    function drawLines() {
+      const board = $("#chartBoard");
+      const svg = $("#chartLines");
+      if (!board || !svg) return;
+      const boardRect = board.getBoundingClientRect();
+      const w = board.scrollWidth;
+      const h = board.scrollHeight;
+      svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+      svg.setAttribute("width", String(w));
+      svg.setAttribute("height", String(h));
+
+      const cards = {};
+      document.querySelectorAll(".digi-card").forEach(c => {
+        if (c.classList.contains("hidden-filter")) return;
+        cards[c.dataset.id] = c;
+      });
+
+      const paths = [];
+      for (const d of DB.digimon) {
+        const fromEl = cards[d.id];
+        if (!fromEl) continue;
+        for (const tid of (d.evolvesTo || [])) {
+          const toEl = cards[tid];
+          if (!toEl) continue;
+          const a = nodeCenter(fromEl, boardRect);
+          const b = nodeCenter(toEl, boardRect);
+          const x1 = a.right - 2;
+          const y1 = a.y;
+          const x2 = b.left + 2;
+          const y2 = b.y;
+          const dx = Math.max(24, (x2 - x1) * 0.45);
+          const dAttr = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+          paths.push({ from: d.id, to: tid, d: dAttr });
+        }
+      }
+
+      svg.innerHTML = paths.map(p =>
+        `<path data-from="${p.from}" data-to="${p.to}" d="${p.d}" />`
+      ).join("");
+      styleLines();
+    }
+
+    function scheduleDrawLines() {
+      clearTimeout(lineDrawTimer);
+      lineDrawTimer = setTimeout(drawLines, 40);
+    }
+
+    function styleLines() {
+      const focus = hoverId || selectedId;
+      const rel = focus ? relatedSet(focus) : null;
+      document.querySelectorAll("#chartLines path").forEach(p => {
+        p.classList.remove("hi", "rel", "dim");
+        if (!focus) return;
+        const f = p.dataset.from;
+        const t = p.dataset.to;
+        const touches = f === focus || t === focus;
+        const relatedEdge = rel && rel.has(f) && rel.has(t);
+        if (touches) p.classList.add("hi");
+        else if (relatedEdge) p.classList.add("rel");
+        else p.classList.add("dim");
+      });
     }
 
     function relatedSet(id) {
@@ -682,7 +889,6 @@
       const s = new Set([id]);
       (d.evolvesFrom || []).forEach(x => s.add(x));
       (d.evolvesTo || []).forEach(x => s.add(x));
-      // also one hop for chart clarity
       (d.evolvesFrom || []).forEach(fid => (byId[fid]?.evolvesFrom || []).forEach(x => s.add(x)));
       (d.evolvesTo || []).forEach(tid => (byId[tid]?.evolvesTo || []).forEach(x => s.add(x)));
       return s;
@@ -692,6 +898,7 @@
       const cards = document.querySelectorAll(".digi-card");
       if (!selectedId) {
         cards.forEach(c => c.classList.remove("active","dim","related"));
+        styleLines();
         return;
       }
       const rel = relatedSet(selectedId);
@@ -701,6 +908,7 @@
         c.classList.toggle("related", rel.has(id) && id !== selectedId);
         c.classList.toggle("dim", !rel.has(id));
       });
+      styleLines();
     }
 
     function pathChips(ids, emptyText) {
@@ -708,8 +916,8 @@
       return `<div class="path-list">${ids.map(id => {
         const d = byId[id];
         return `<button type="button" class="path-chip" data-goto="${id}">
-          <img src="${spriteUrl(id)}" alt="" width="28" height="28"
-            onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${(d?.en||id).slice(0,2)}',style:'width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;background:#1a2a44;border-radius:8px;font-size:10px'}))" />
+          <img data-sprite-id="${id}" src="${spriteUrl(id)}" alt="" width="28" height="28"
+            onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${(d?.en||id).slice(0,2)}',style:'width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;background:#1a2a44;font-size:10px;border:2px solid #6B3E1F'}))" />
           ${d?.zh || id} <span class="muted">(${d?.en || id})</span>
         </button>`;
       }).join("")}</div>`;
@@ -738,12 +946,13 @@
       } else {
         reqBlock = `<p class="muted">此形態多為特殊進化入口，或沒有標準自然條件表（見特殊進化）。</p>`;
       }
+      const lab = STAGE_LABEL[d.stage];
       panel.innerHTML = `
         <div class="detail-head">
           ${thumbHTML(d.id, 64)}
           <div>
             <strong style="font-size:1.15rem">${d.zh}</strong>
-            <div class="muted">${d.en} · ${STAGE_LABEL[d.stage]}</div>
+            <div class="muted">${d.en} · ${lab.zh} ${lab.en}</div>
           </div>
         </div>
         <h3>進化自</h3>
@@ -759,7 +968,7 @@
       panel.querySelectorAll("[data-goto]").forEach(btn => {
         btn.addEventListener("click", () => {
           selectDigimon(btn.dataset.goto);
-          document.querySelector(`.digi-card[data-id="${btn.dataset.goto}"]`)?.scrollIntoView({behavior:"smooth", block:"center"});
+          document.querySelector(`.digi-card[data-id="${btn.dataset.goto}"]`)?.scrollIntoView({behavior:"smooth", block:"center", inline:"center"});
         });
       });
       $("#useInCalc")?.addEventListener("click", () => {
@@ -777,6 +986,7 @@
       ["chart","calc","rules","specials"].forEach(t => {
         $(`#tab-${t}`).classList.toggle("hidden", t !== name);
       });
+      if (name === "chart") scheduleDrawLines();
     }
 
     function evalCare(care, value) {
@@ -812,7 +1022,6 @@
       let ok = allMet;
       let extra = "";
       if (isRookieTarget && req.highestStatKeys?.length) {
-        // compare with HP/MP /10
         const cmp = {
           hp: stats.hp / 10,
           mp: stats.mp / 10,
@@ -868,9 +1077,7 @@
     function canEvolveFrom(currentId, target) {
       const cur = byId[currentId];
       if (!cur) return false;
-      // natural chart edge
       if ((cur.evolvesTo || []).includes(target.id)) return true;
-      // Fresh auto to their only form
       if (cur.stage === "fresh" && (cur.evolvesTo || []).includes(target.id)) return true;
       return false;
     }
@@ -899,7 +1106,6 @@
       const resultsEl = $("#calcResults");
       if (!cur) { resultsEl.innerHTML = `<p class="warn">請選擇目前 Digimon</p>`; return; }
 
-      // Fresh: only auto next
       if (cur.stage === "fresh") {
         const next = (cur.evolvesTo || []).map(id => byId[id]).filter(Boolean);
         resultsEl.innerHTML = `<div class="note">幼年期Ⅰ約 6 小時後<strong>必定</strong>進化為：</div>` +
@@ -936,7 +1142,6 @@
         return b.score - a.score;
       });
 
-      // Also mention special fallbacks briefly
       let extra = "";
       if (cur.stage === "rookie") {
         extra = `<div class="warn">若成長期約 96 小時仍無自然進化，可能變成<strong>鼻涕獸 Numemon</strong>（特殊）。病毒條滿則變<strong>屎屎獸</strong>。</div>`;
@@ -969,9 +1174,10 @@
     function fillSelect() {
       const sel = $("#curDigimon");
       sel.innerHTML = STAGE_ORDER.map(stage => {
+        const lab = STAGE_LABEL[stage];
         const opts = DB.digimon.filter(d => d.stage === stage)
           .map(d => `<option value="${d.id}">${d.zh}（${d.en}）</option>`).join("");
-        return `<optgroup label="${STAGE_LABEL[stage]}">${opts}</optgroup>`;
+        return `<optgroup label="${lab.zh} ${lab.en}">${opts}</optgroup>`;
       }).join("");
       sel.value = "agumon";
     }
@@ -1019,6 +1225,7 @@
       DB = await res.json();
       byId = Object.fromEntries(DB.digimon.map(d => [d.id, d]));
       $("#dbCount").textContent = `${DB.meta.count} 隻 Digimon`;
+      setSpriteStyle(spriteStyle);
       renderChart();
       fillSelect();
       renderSpecials();
@@ -1032,8 +1239,18 @@
         $("#detailPanel").classList.remove("show");
         applyHighlight();
       });
+      $("#stylePixel").addEventListener("click", () => setSpriteStyle("pixel"));
+      $("#styleArt").addEventListener("click", () => setSpriteStyle("art"));
       $("#btnCalc").addEventListener("click", calculate);
       $("#btnPresetAgumon").addEventListener("click", presetGreymon);
+
+      window.addEventListener("resize", scheduleDrawLines);
+      $("#chartScroll")?.addEventListener("scroll", scheduleDrawLines, { passive: true });
+      if (window.ResizeObserver) {
+        new ResizeObserver(scheduleDrawLines).observe($("#chartBoard"));
+      }
+      // fonts can shift layout
+      if (document.fonts?.ready) document.fonts.ready.then(scheduleDrawLines);
     }
 
     init().catch(err => {
