@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="《數碼暴龍世界》PlayStation（PS1）粉絲攻略：養成、訓練、戰鬥、進化、地圖與道具。" />
+  <title>《數碼暴龍世界》PS 版攻略（Digimon World）</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-soft: #121c2e;
+      --panel: #162338;
+      --panel-2: #1b2b44;
+      --border: #2a4060;
+      --text: #e8eef7;
+      --muted: #9db0c9;
+      --accent: #3ecf8e;
+      --accent-2: #57b6ff;
+      --warn: #ffb454;
+      --danger: #ff7b7b;
+      --gold: #f0d36a;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --radius: 14px;
+      --max: 980px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang HK", "Microsoft JhengHei", "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(62, 207, 142, 0.12), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(87, 182, 255, 0.12), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent-2); text-decoration: none; }
+    a:hover { text-decoration: underline; color: #8fd0ff; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px 64px; }
+
+    header.hero {
+      padding: 28px 0 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: #07301d;
+      background: linear-gradient(135deg, var(--accent), #7dffc0);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.55rem, 4vw, 2.2rem);
+      line-height: 1.25;
+      color: #f5fbff;
+    }
+    .subtitle { color: var(--muted); margin: 0 0 14px; max-width: 48rem; }
+    .meta {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      color: var(--muted); font-size: 13px;
+    }
+    .chip {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    nav.toc {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 18, 32, 0.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px;
+      margin: 16px 0 28px;
+      box-shadow: var(--shadow);
+    }
+    nav.toc .nav-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      padding: 2px 8px 8px;
+    }
+    nav.toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    nav.toc a {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 13px;
+      text-decoration: none;
+    }
+    nav.toc a:hover,
+    nav.toc a.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(62, 207, 142, 0.08);
+    }
+
+    section {
+      background: linear-gradient(180deg, var(--panel), var(--bg-soft));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 18px;
+      margin: 0 0 18px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 88px;
+    }
+    section h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    section h3 {
+      margin: 18px 0 8px;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 0 0 12px; padding-left: 1.25rem; }
+    li { margin: 4px 0; }
+    .muted { color: var(--muted); }
+    .note {
+      background: rgba(87, 182, 255, 0.08);
+      border-left: 3px solid var(--accent-2);
+      padding: 10px 12px;
+      border-radius: 0 10px 10px 0;
+      margin: 12px 0;
+      color: #d7e9ff;
+    }
+    .warn {
+      background: rgba(255, 180, 84, 0.1);
+      border-left: 3px solid var(--warn);
+      padding: 10px 12px;
+      border-radius: 0 10px 10px 0;
+      margin: 12px 0;
+      color: #ffe7c2;
+    }
+    .danger-box {
+      background: rgba(255, 123, 123, 0.08);
+      border-left: 3px solid var(--danger);
+      padding: 10px 12px;
+      border-radius: 0 10px 10px 0;
+      margin: 12px 0;
+      color: #ffd5d5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px;
+      font-size: 14px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: rgba(62, 207, 142, 0.12);
+      color: #d9ffe9;
+      font-weight: 700;
+    }
+    tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .card {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .card h4 {
+      margin: 0 0 6px;
+      color: var(--accent-2);
+      font-size: 0.98rem;
+    }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: 0.9em;
+    }
+    footer {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px 8px 8px;
+    }
+    .to-top {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(22, 35, 56, 0.95);
+      color: var(--accent);
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+    .to-top.show { display: inline-flex; align-items: center; justify-content: center; }
+    @media (max-width: 640px) {
+      section { padding: 18px 14px; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
+      nav.toc { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="badge">PS1 · Digimon World (1999)</div>
+      <h1>《數碼暴龍世界》PS 版攻略（Digimon World）</h1>
+      <p class="subtitle">
+        面向養成／探索玩家的粉絲整理頁：從 File City 起家、照顧數碼寶貝、訓練戰鬥，到常見進化路線與地圖提示。
+        內容對應 <strong>1999 年 PlayStation 原版</strong>，並非 Re:Digitize 或 Next Order。
+      </p>
+      <div class="meta">
+        <span class="chip">繁體中文（香港）</span>
+        <span class="chip">粉絲攻略 · 非官方</span>
+        <span class="chip">無 ROM／盜版連結</span>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="章節導覽">
+      <div class="nav-title">導覽 Navigation</div>
+      <ul>
+        <li><a href="#overview">1. 概覽</a></li>
+        <li><a href="#raising">2. 養成基礎</a></li>
+        <li><a href="#training">3. 訓練與能力</a></li>
+        <li><a href="#battle">4. 戰鬥要點</a></li>
+        <li><a href="#evolution">5. 進化概論</a></li>
+        <li><a href="#locations">6. 主要地點</a></li>
+        <li><a href="#items">7. 道具與食物</a></li>
+        <li><a href="#tips">8. Tips／常見坑</a></li>
+        <li><a href="#disclaimer">9. 免責</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="overview">
+        <h2>1. 概覽／遊戲簡介</h2>
+        <p>
+          《數碼暴龍世界》（日：デジモンワールド／英：Digimon World）是 1999 年於 PlayStation 推出的養成＋RPG。
+          你扮演墜入數碼世界的少年，在 File Island 與夥伴 Digimon 一起把荒廢的 <strong>File City</strong> 重建起來。
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h4>核心循環</h4>
+            <p>餵食／清理 → 訓練屬性 → 野外戰鬥 → 進化／招募夥伴 → 解鎖城市設施與新地圖。</p>
+          </div>
+          <div class="card">
+            <h4>起點夥伴</h4>
+            <p>通常由 <strong>Botamon → Koromon → Agumon</strong> 開始；之後依照顧、數值與戰績走上不同進化樹。</p>
+          </div>
+          <div class="card">
+            <h4>遊戲目標</h4>
+            <p>擴大 File City 人口（招募 Digimon）、探索島嶼、挑戰高難度區域如 Mt. Infinity，並理解「壽命」機制。</p>
+          </div>
+        </div>
+        <div class="note">
+          <strong>重點：</strong>這作不是傳統回合制隊伍 RPG，而是「一隻主 Digimon 陪你長大」。
+          壽命（Lifespan）會消耗；Digimon 死亡後可再養成，城市進度通常保留。
+        </div>
+      </section>
+
+      <section id="raising">
+        <h2>2. 養成基礎</h2>
+        <p>養成狀態欄要經常看。忽略任何一項都可能變成 <strong>Care Mistake</strong>（照顧失誤），直接影響進化與壽命。</p>
+
+        <h3>主要狀態</h3>
+        <table>
+          <thead>
+            <tr><th>狀態</th><th>英文</th><th>說明與建議</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>飢餓</td>
+              <td>Hunger</td>
+              <td>肚餓會喊；不及時餵會扣快樂並記 Care Mistake。別一次餵到過飽（Weight 暴升）。</td>
+            </tr>
+            <tr>
+              <td>便便</td>
+              <td>Poop / Waste</td>
+              <td>便便要盡快清；放著會生病、扣快樂、累積 Care Mistake。</td>
+            </tr>
+            <tr>
+              <td>快樂</td>
+              <td>Happiness</td>
+              <td>讚美、正確餵食、勝利戰鬥可升；忽略需求、輸戰、過多責罵會跌。</td>
+            </tr>
+            <tr>
+              <td>紀律</td>
+              <td>Discipline</td>
+              <td>責罵不當行為、規律訓練可升；過度放縱或亂罵會亂。高 Discipline 常連到「天使系／正經系」進化。</td>
+            </tr>
+            <tr>
+              <td>體重</td>
+              <td>Weight</td>
+              <td>吃肉、休息會升；訓練、跑步、特定食物可降。進化常有目標 Weight 區間。</td>
+            </tr>
+            <tr>
+              <td>壽命</td>
+              <td>Lifespan / Life</td>
+              <td>隨時間／活動消耗。Care Mistake、生病、過勞會加速折壽；休息與良好照顧可緩和。</td>
+            </tr>
+            <tr>
+              <td>照顧失誤</td>
+              <td>Care Mistakes</td>
+              <td>錯過餵食、清便、治療等會累積。少失誤 → 較「正面」進化；多失誤 → 較「黑暗／歪系」路線較易出現。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>日常照顧節奏</h3>
+        <ol>
+          <li>聽到喊叫（Hungry／Poop／Sick）→ 立刻處理，唔好拖。</li>
+          <li>餵食優先用適合當前目標體重的食物（想減重就少肉、多菜／訓練）。</li>
+          <li>訓練前後留意疲勞；累透就休息，避免硬撐出事。</li>
+          <li>適度 Praise（讚美）與 Scold（責罵）：亂罵會扣 Happiness。</li>
+          <li>生病先治；帶病訓練／探險風險高。</li>
+        </ol>
+        <div class="warn">
+          <strong>常見誤解：</strong>「永遠不罵」不一定最好。某些進化需要一定 Discipline；關鍵是「該罵才罵」，並即時回應需求以減少 Care Mistakes。
+        </div>
+      </section>
+
+      <section id="training">
+        <h2>3. 訓練與能力值</h2>
+        <p>
+          File City 的 Gym／訓練設施（隨城市發展解鎖）用來拉六圍。
+          訓練有成功率，失敗浪費時間但仍可能影響疲勞與體重。
+        </p>
+
+        <h3>六圍簡表</h3>
+        <table>
+          <thead>
+            <tr><th>能力</th><th>英文</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>體力</td><td>HP</td><td>耐打；高難度區與長線戰鬥必備。</td></tr>
+            <tr><td>魔力／技力</td><td>MP</td><td>施放 Technique（必殺／特殊技）消耗。</td></tr>
+            <tr><td>攻擊</td><td>Offense (Off)</td><td>普攻與多數攻擊技傷害。</td></tr>
+            <tr><td>防禦</td><td>Defense (Def)</td><td>減傷；坦克型進化常看重。</td></tr>
+            <tr><td>速度</td><td>Speed</td><td>影響先手與迴避相關表現。</td></tr>
+            <tr><td>智力</td><td>Brains</td><td>技學習／命中相關；多條「賢者／天使」路線重視。</td></tr>
+          </tbody>
+        </table>
+
+        <h3>訓練方式與建議</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>HP／Defense 向</h4>
+            <p>偏重防禦與體力訓練，適合走坦克（如部分 Tyrannomon／Shellmon 路線思維）。配合較高 Weight 目標時常見。</p>
+          </div>
+          <div class="card">
+            <h4>Offense 向</h4>
+            <p>主攻輸出。Agumon → Greymon 系通常要足夠攻擊；但別忽略 Def／HP，否則野外被反殺。</p>
+          </div>
+          <div class="card">
+            <h4>Speed 向</h4>
+            <p>想走敏捷系或某些鳥／獸路線時加強。亦可輔助脫戰與先手。</p>
+          </div>
+          <div class="card">
+            <h4>Brains／MP 向</h4>
+            <p>想學較多 Technique、走 Angemon 等路線時重要。MP 不足會變成「只會普攻」。</p>
+          </div>
+        </div>
+
+        <h3>實務建議</h3>
+        <ul>
+          <li>每次進化前先定「目標形態」，再決定主攻哪 2–3 項數值，避免平均廢功。</li>
+          <li>訓練會耗壽命與體力；進化窗口接近時，改以「補門檻」為主，勿無腦刷到老死。</li>
+          <li>用道具（如訓練輔助類）可提高效率，但早期資源有限，留給關鍵衝刺。</li>
+          <li>Weight 與訓練互相拉扯：狂練通常偏瘦；狂吃會肥——配合進化條件微調。</li>
+        </ul>
+      </section>
+
+      <section id="battle">
+        <h2>4. 戰鬥要點</h2>
+        <p>
+          野外遇敵後進入戰鬥畫面。你的 Digimon 會自動行動，但你可以設定策略傾向、選擇 Technique，並留意 MP 與狀態。
+        </p>
+        <h3>技巧／MP</h3>
+        <ul>
+          <li><strong>Technique</strong>：各 Digimon 可學多種技能；強技耗 MP 高。</li>
+          <li>MP 見底時只能普通攻擊，輸出與控場大幅下降——出遠門前確認 MP／回復道具。</li>
+          <li>戰鬥勝利可提升經驗與部分養成相關數值；連勝有助部分進化條件（「戰鬥數／勝利數」類）。</li>
+        </ul>
+        <h3>狀態與風險</h3>
+        <ul>
+          <li>中毒、麻痺、混亂等狀態要優先處理；帶病硬闖高危區容易暴斃。</li>
+          <li>對手屬性／技能克制存在手感差：打不過就撤退回城補滿再來。</li>
+          <li>Boss／守護型敵人（如通往 Mt. Infinity 沿途）建議先把六圍與技能練熟。</li>
+        </ul>
+        <div class="note">
+          這作戰鬥節奏偏「養成成果的驗收」。輸多了未必只是操作問題——可能是進化體不適合該區，或 HP／Def 門檻不夠。
+        </div>
+      </section>
+
+      <section id="evolution">
+        <h2>5. 進化概論與常見路線</h2>
+        <div class="warn">
+          <strong>社群整理、非官方保證。</strong>
+          進化由多項條件組合觸發（數值門檻、Weight、Care Mistakes、戰鬥數、快樂／紀律、累計照顧時間等）。
+          不同版本／修補／模擬器時序可能有出入；以下為社群長年整理的「常見方向」，唔係 Bandai 官方保證公式。
+        </div>
+
+        <h3>進化邏輯（簡化）</h3>
+        <ul>
+          <li>時間到了且條件吻合 → 進化；條件衝突時，遊戲會按優先規則選一條。</li>
+          <li>Care Mistakes 少、Discipline／Happiness 高 → 較易偏「光／秩序」向。</li>
+          <li>Care Mistakes 多、Discipline 低 → 較易偏「暗／歪」向。</li>
+          <li>特定 Weight 區間常是分水嶺（過重／過輕都會鎖死某些形態）。</li>
+          <li>Offense／Defense／Speed／Brains／HP／MP 各有門檻；「剛好達標」比「單一屬性爆表」更重要。</li>
+        </ul>
+
+        <h3>Agumon 起點：常見 Child → Adult 方向</h3>
+        <table>
+          <thead>
+            <tr><th>目標</th><th>大致傾向（社群整理）</th><th>備註</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Greymon</strong></td>
+              <td>均衡偏攻防、Care Mistakes 少、中等 Weight、一定戰鬥歷練</td>
+              <td>最經典「王道」成體；之後可衝 MetalGreymon 等。</td>
+            </tr>
+            <tr>
+              <td><strong>Tyrannomon</strong></td>
+              <td>較高 Weight／HP／Offense 取向，條件與 Greymon 相近但更「厚重」</td>
+              <td>坦克臉；適合作前期扛傷夥伴路線之一。</td>
+            </tr>
+            <tr>
+              <td><strong>Meramon</strong></td>
+              <td>偏 Offense／Speed、Weight 管理、火焰系技學習方向</td>
+              <td>輸出臉；注意生存能力。</td>
+            </tr>
+            <tr>
+              <td><strong>Birdramon</strong></td>
+              <td>Speed／MP 等飛行系傾向，Weight 不宜過重</td>
+              <td>機動向；探索期手感輕快。</td>
+            </tr>
+            <tr>
+              <td><strong>Centarumon</strong></td>
+              <td>Brains 較高、紀律良好</td>
+              <td>常與「智系／槍系」印象綁在一起。</td>
+            </tr>
+            <tr>
+              <td><strong>Monochromon</strong></td>
+              <td>Defense／HP、較重 Weight</td>
+              <td>防禦臉；練裝甲思路。</td>
+            </tr>
+            <tr>
+              <td><strong>Devimon</strong></td>
+              <td>Care Mistakes 偏多、Discipline 偏低、黑暗向數值</td>
+              <td>「歪養」代表；唔等於強，但劇情／收集向受歡迎。</td>
+            </tr>
+            <tr>
+              <td><strong>Angemon</strong></td>
+              <td>Care Mistakes 少、Discipline／Happiness 高、Brains 足夠</td>
+              <td>「好孩子」路線；之後可往更高階光系想像。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Greymon → MetalGreymon（常見延續）</h3>
+        <p>
+          社群路線多要求 Greymon 期間把 <strong>Offense／Defense／Speed／Brains</strong> 等多項拉到高門檻，
+          並維持較少 Care Mistakes、合適 Weight 與足夠戰鬥數。失敗時可能落入其他完美體／突變，或錯失窗口。
+        </p>
+        <div class="note">
+          想收集圖鑑：刻意走 Devimon／Numemon 等「失敗／歪系」也是玩法之一。
+          Numemon 常與大量 Care Mistakes、低數值或特定惡搞條件連結——可作彩蛋養成。
+        </div>
+      </section>
+
+      <section id="locations">
+        <h2>6. 主要地點</h2>
+        <p>File Island 以 File City 為中心向各生態區擴散。城市設施愈多，訓練、商店與劇情推進愈順。</p>
+        <div class="grid">
+          <div class="card">
+            <h4>File City</h4>
+            <p>主城與樞紐。招募 Digimon 進駐可開商店、Gym、餐廳、診所等。每次出門前在此補狀態。</p>
+          </div>
+          <div class="card">
+            <h4>Native Forest</h4>
+            <p>初期森林區。教學向遭遇戰、基礎道具與劇情 NPC。適合暖機與練手。</p>
+          </div>
+          <div class="card">
+            <h4>Tropical Jungle</h4>
+            <p>高濕叢林，敵人與陷阱感較強。帶足回復，留意迷路；適合中前期探索。</p>
+          </div>
+          <div class="card">
+            <h4>Great Canyon</h4>
+            <p>峽谷地形，移動路徑較繞。注意掉落／捷徑與中階對手，適合有穩定成體後挑戰。</p>
+          </div>
+          <div class="card">
+            <h4>Gear Savannah</h4>
+            <p>草原／機械遺跡氛圍並存的開闊區。遭遇戰頻率感高，練級與收集素材常用。</p>
+          </div>
+          <div class="card">
+            <h4>Factorial Town</h4>
+            <p>工廠城鎮風格地圖，機關與機械系 Digimon 多。解謎／繞路前先存好進度習慣。</p>
+          </div>
+          <div class="card">
+            <h4>Freezeland</h4>
+            <p>冰雪地帶，耗損與敵人壓力較大。出門前確認 HP／抗性向準備，避免硬闖。</p>
+          </div>
+          <div class="card">
+            <h4>Misty Trees</h4>
+            <p>霧林，視野與方向感易亂。跟著地標、逐步開圖；適合中後期。</p>
+          </div>
+          <div class="card">
+            <h4>Ancient Dino Region</h4>
+            <p>古代恐龍風格區域，對手偏肉。建議高 Def／HP 或成熟輸出技再進入。</p>
+          </div>
+          <div class="card">
+            <h4>Mt. Infinity</h4>
+            <p>後期高山／試煉向地圖，層層挑戰。務必以成熟完美體思維準備，並預留壽命。</p>
+          </div>
+          <div class="card">
+            <h4>Back Dimension</h4>
+            <p>特殊／後期向空間，風險與獎勵都高。當成終盤內容，勿過早送死。</p>
+          </div>
+        </div>
+        <div class="warn">
+          <strong>探險建議：</strong>壽命有限——每次遠征定一個目標（招募某 Digimon、拿某道具、打通某捷徑），達標即回城，避免「順便再看看」看到老死在野外。
+        </div>
+      </section>
+
+      <section id="items">
+        <h2>7. 道具與食物</h2>
+        <h3>常見食物（影響 Hunger／Weight／心情）</h3>
+        <table>
+          <thead>
+            <tr><th>類型</th><th>例子（常見稱呼）</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>肉類</td>
+              <td>Meat、大份肉食等</td>
+              <td>快速消飢、易升 Weight；衝重型進化前常用，減重期少吃。</td>
+            </tr>
+            <tr>
+              <td>蔬果／清淡</td>
+              <td>蔬菜、水果類</td>
+              <td>補飢較溫和，Weight 負擔較低；管理體重時優先。</td>
+            </tr>
+            <tr>
+              <td>特殊餐</td>
+              <td>城市餐廳／活動料理</td>
+              <td>可能附帶 Happiness 或其他加成；視當前養成目標選用。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>恢復與狀態</h3>
+        <ul>
+          <li><strong>HP 回復</strong>：各級 Recovery／藥水類——出門基本盤。</li>
+          <li><strong>MP 回復</strong>：長線戰鬥或技攻隊必帶。</li>
+          <li><strong>狀態治療</strong>：解毒、醒神等；對應叢林／毒系區域尤重要。</li>
+          <li><strong>診所</strong>：回 File City 找醫療設施處理重病，比野外硬扛安全。</li>
+        </ul>
+
+        <h3>訓練／養成輔助</h3>
+        <ul>
+          <li>提升某項訓練成功率或收益的道具：留給「進化前最後衝刺」。</li>
+          <li>影響 Happiness／Discipline 的道具：微調進化傾向時好用，但唔好依賴到忽略日常照顧。</li>
+          <li>便攜廁所／應急清理類（視你取得的道具）：減少野外 Care Mistake 風險。</li>
+        </ul>
+        <p class="muted">商店庫存隨 File City 發展與招募對象變化——多找居民對話，常有新貨與隱藏提示。</p>
+      </section>
+
+      <section id="tips">
+        <h2>8. 實用 Tips／常見坑</h2>
+        <ol>
+          <li><strong>先顧命再追稀有。</strong>壽命見底仲喺 Mt. Infinity 迷路＝進度倒退感最重。</li>
+          <li><strong>Care Mistake 會說話。</strong>想 Angemon 就唔好當佢隱形；想 Devimon 就有意識地「放縱」——但要可控。</li>
+          <li><strong>唔好只堆 Offense。</strong>玻璃大炮喺自動戰鬥裡好易暴斃。</li>
+          <li><strong>Weight 要用食物＋訓練對沖。</strong>眼見數字，唔好估。</li>
+          <li><strong>城市建設＝系統解鎖。</strong>卡關時先問：係咪仲未招募到開設施／開門的 Digimon？</li>
+          <li><strong>存檔習慣。</strong>進化前、進新地圖前、挑戰強敵前各存一次（視平台／記憶卡策略）。</li>
+          <li><strong>死亡唔等於遊戲結束。</strong>重新養成時可帶著城市進度再衝圖鑑與路線。</li>
+          <li><strong>別把後作規則套入。</strong>Re:Digitize／Next Order 的農場、多人、進化石邏輯與此作不同。</li>
+        </ol>
+        <div class="danger-box">
+          本頁唔會提供、亦請勿索取 ROM、ISO、盜版下載或破解方法。請使用你合法擁有的實體／正版數位途徑遊玩。
+        </div>
+      </section>
+
+      <section id="disclaimer">
+        <h2>9. 免責聲明</h2>
+        <p>
+          本頁為<strong>粉絲向攻略整理</strong>，僅供學習與娛樂參考。
+          Digimon／數碼暴龍及相关角色、名稱與設定之商標權、著作權歸
+          <strong>Bandai／Toei／相關權利人</strong>所有。
+        </p>
+        <ul>
+          <li>非官方、非商業授權文本；內容可能有錯漏或因版本而異。</li>
+          <li>進化條件標示為社群長年討論之整理方向，<strong>非官方保證</strong>。</li>
+          <li><strong>不含</strong>任何 ROM、ISO、盜版、模擬器盜版資源之連結或指引。</li>
+          <li>如權利方有疑慮，請透過正當管道聯繫頁面持有人下架修正。</li>
+        </ul>
+        <p class="muted">製作目的：方便 Aaron 語音需求之離線可開 HTML 攻略頁；可自行改內容後部署到任何靜態空間。</p>
+      </section>
+    </main>
+
+    <footer>
+      Digimon World (PS1) Fan Guide · 繁中（香港）· 本地靜態頁<br />
+      <a href="#overview">回到頂部</a>
+    </footer>
+  </div>
+
+  <button class="to-top" id="toTop" type="button" aria-label="回到頂部">↑</button>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("toTop");
+      var links = document.querySelectorAll("nav.toc a");
+      var sections = [];
+      links.forEach(function (a) {
+        var id = a.getAttribute("href");
+        if (id && id.charAt(0) === "#") {
+          var el = document.querySelector(id);
+          if (el) sections.push({ el: el, a: a });
+        }
+      });
+
+      function onScroll() {
+        var y = window.scrollY || document.documentElement.scrollTop;
+        if (btn) btn.classList.toggle("show", y > 400);
+        var current = null;
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].el.offsetTop - 100 <= y) current = sections[i];
+        }
+        links.forEach(function (a) { a.classList.remove("active"); });
+        if (current) current.a.classList.add("active");
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+      if (btn) btn.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    })();
+  </script>
+</body>
+</html>
