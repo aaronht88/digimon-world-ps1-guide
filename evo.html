@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="《數碼暴龍世界》PS1 進化圖與數值推算互動機：完整進化線、縮圖可點、輸入數值推論可能進化。" />
+  <title>進化參考互動機｜《數碼暴龍世界》PS1</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-soft: #121c2e;
+      --panel: #162338;
+      --panel-2: #1b2b44;
+      --border: #2a4060;
+      --text: #e8eef7;
+      --muted: #9db0c9;
+      --accent: #3ecf8e;
+      --accent-2: #57b6ff;
+      --warn: #ffb454;
+      --danger: #ff7b7b;
+      --gold: #f0d36a;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --radius: 14px;
+      --max: 1100px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang HK", "Microsoft JhengHei", "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(62, 207, 142, 0.12), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(87, 182, 255, 0.12), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+    a { color: var(--accent-2); text-decoration: none; }
+    a:hover { text-decoration: underline; color: #8fd0ff; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px 64px; }
+    header.hero {
+      padding: 28px 0 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: #07301d;
+      background: linear-gradient(135deg, var(--accent), #7dffc0);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.4rem, 3.6vw, 2rem);
+      line-height: 1.25;
+      color: #f5fbff;
+    }
+    .subtitle { color: var(--muted); margin: 0 0 12px; max-width: 52rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; }
+    .chip {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+    .tabs {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 16px 0 18px;
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(11, 18, 32, 0.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px;
+      box-shadow: var(--shadow);
+    }
+    .tabs button {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .tabs button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(62, 207, 142, 0.1);
+    }
+    .panel-block {
+      background: linear-gradient(180deg, var(--panel), var(--bg-soft));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin: 0 0 18px;
+      box-shadow: var(--shadow);
+    }
+    .panel-block h2 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .panel-block h3 { margin: 14px 0 8px; font-size: 1.02rem; color: var(--accent); }
+    .muted { color: var(--muted); }
+    .note {
+      background: rgba(87, 182, 255, 0.08);
+      border-left: 3px solid var(--accent-2);
+      padding: 10px 12px;
+      border-radius: 0 10px 10px 0;
+      margin: 10px 0;
+      color: #d7e9ff;
+      font-size: 14px;
+    }
+    .warn {
+      background: rgba(255, 180, 84, 0.1);
+      border-left: 3px solid var(--warn);
+      padding: 10px 12px;
+      border-radius: 0 10px 10px 0;
+      margin: 10px 0;
+      color: #ffe7c2;
+      font-size: 14px;
+    }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      margin: 0 0 14px;
+    }
+    .toolbar input[type="search"],
+    .form-grid input,
+    .form-grid select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font: inherit;
+      font-size: 14px;
+    }
+    .toolbar input[type="search"] { flex: 1; min-width: 180px; }
+    .stage-row { margin: 0 0 16px; }
+    .stage-label {
+      font-size: 13px; color: var(--muted); letter-spacing: 0.04em;
+      margin: 0 0 8px; text-transform: uppercase;
+    }
+    .digi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+    }
+    .digi-card {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      border-radius: 12px;
+      padding: 8px 6px;
+      cursor: pointer;
+      color: var(--text);
+      text-align: center;
+      transition: border-color .15s, transform .12s, background .15s;
+    }
+    .digi-card:hover { border-color: var(--accent-2); transform: translateY(-1px); }
+    .digi-card.active {
+      border-color: var(--accent);
+      background: rgba(62, 207, 142, 0.12);
+      box-shadow: 0 0 0 1px rgba(62, 207, 142, 0.35);
+    }
+    .digi-card.dim { opacity: 0.28; }
+    .digi-card.related {
+      opacity: 1;
+      border-color: var(--accent-2);
+      background: rgba(87, 182, 255, 0.1);
+    }
+    .thumb {
+      width: 48px; height: 48px; margin: 0 auto 6px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.25);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .thumb img { width: 48px; height: 48px; object-fit: contain; image-rendering: auto; }
+    .thumb .fb {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px; color: var(--gold);
+      background: linear-gradient(135deg, #1a2a44, #243a5c);
+    }
+    .digi-card .name { font-size: 12px; font-weight: 700; line-height: 1.25; }
+    .digi-card .en { font-size: 10px; color: var(--muted); }
+    .detail {
+      display: none;
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(0,0,0,.18);
+      padding: 14px;
+    }
+    .detail.show { display: block; }
+    .detail-head {
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .detail-head .thumb { width: 64px; height: 64px; margin: 0; }
+    .detail-head .thumb img { width: 64px; height: 64px; }
+    .path-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; }
+    .path-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px 4px 4px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .path-chip img { width: 28px; height: 28px; border-radius: 8px; background: #0003; }
+    .req-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+    .req-table th, .req-table td {
+      border: 1px solid var(--border); padding: 6px 8px; text-align: left; vertical-align: top;
+    }
+    .req-table th { background: rgba(62, 207, 142, 0.12); color: #d9ffe9; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .form-grid label {
+      display: flex; flex-direction: column; gap: 4px;
+      font-size: 12px; color: var(--muted);
+    }
+    .btn {
+      appearance: none;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), #2aa96e);
+      color: #042015;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font: inherit;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .btn.secondary {
+      background: var(--panel-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+    .results { display: grid; gap: 10px; margin-top: 14px; }
+    .result-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel-2);
+      padding: 12px;
+    }
+    .result-card.ok { border-color: rgba(62, 207, 142, 0.55); }
+    .result-card.near { border-color: rgba(255, 180, 84, 0.5); }
+    .result-card.fail { opacity: 0.75; }
+    .result-top {
+      display: flex; gap: 10px; align-items: center; margin-bottom: 8px;
+    }
+    .result-top .thumb { margin: 0; width: 48px; height: 48px; }
+    .pass { color: var(--accent); font-weight: 700; }
+    .failc { color: var(--danger); font-weight: 700; }
+    .crit-list { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+    .crit-list li {
+      display: flex; justify-content: space-between; gap: 8px;
+      padding: 4px 0; border-bottom: 1px dashed rgba(42,64,96,.6);
+    }
+    .hidden { display: none !important; }
+    footer {
+      margin-top: 8px; color: var(--muted); font-size: 13px;
+      text-align: center; padding: 18px 8px 8px;
+    }
+    @media (max-width: 640px) {
+      .panel-block { padding: 14px; }
+      .digi-grid { grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="badge">PS1 · Digimon World 進化互動機</div>
+      <h1>進化參考互動機</h1>
+      <p class="subtitle">
+        完整進化圖（縮圖可點）＋數值推算：輸入目前 Digimon 與能力，按《數碼暴龍世界》PS1 自然進化規則推論可能進化對象。
+        返回 <a href="./index.html">主攻略</a>。
+      </p>
+      <div class="meta">
+        <span class="chip">繁體中文（香港）</span>
+        <span class="chip">粉絲工具 · 非官方</span>
+        <span class="chip" id="dbCount">資料載入中…</span>
+      </div>
+    </header>
+
+    <div class="tabs" role="tablist">
+      <button type="button" class="active" data-tab="chart" role="tab" aria-selected="true">進化圖</button>
+      <button type="button" data-tab="calc" role="tab" aria-selected="false">進化推算</button>
+      <button type="button" data-tab="rules" role="tab" aria-selected="false">判定規則</button>
+      <button type="button" data-tab="specials" role="tab" aria-selected="false">特殊進化</button>
+    </div>
+
+    <section id="tab-chart" class="panel-block" role="tabpanel">
+      <h2>進化圖</h2>
+      <div class="toolbar">
+        <input type="search" id="chartSearch" placeholder="搜尋中文／英文名…" autocomplete="off" />
+        <button type="button" class="btn secondary" id="clearHighlight">清除高亮</button>
+      </div>
+      <div class="note">點選任一數碼獸可查看進化需求、前階／後階；相關路線會高亮。</div>
+      <div id="chartRoot"></div>
+      <div class="detail" id="detailPanel"></div>
+    </section>
+
+    <section id="tab-calc" class="panel-block hidden" role="tabpanel">
+      <h2>進化推算</h2>
+      <p class="muted">選擇目前形態，輸入狀態數值後按「推算」。符合 <strong>4 類條件中至少 3 類</strong> 者列為候選（並依通過數／契合度排序）。</p>
+      <div class="form-grid">
+        <label>目前 Digimon
+          <select id="curDigimon"></select>
+        </label>
+        <label>HP <input id="fHp" type="number" min="0" value="1000" /></label>
+        <label>MP <input id="fMp" type="number" min="0" value="500" /></label>
+        <label>攻擊 Offense <input id="fOff" type="number" min="0" value="100" /></label>
+        <label>防禦 Defense <input id="fDef" type="number" min="0" value="100" /></label>
+        <label>速度 Speed <input id="fSpd" type="number" min="0" value="100" /></label>
+        <label>智力 Brains <input id="fBrains" type="number" min="0" value="100" /></label>
+        <label>體重 Weight (g) <input id="fWeight" type="number" min="0" value="20" /></label>
+        <label>照顧失誤 Care Mistakes <input id="fCare" type="number" min="0" value="0" /></label>
+        <label>勝場 Battles <input id="fBattles" type="number" min="0" value="0" /></label>
+        <label>招式數 Techniques <input id="fTechs" type="number" min="0" value="0" /></label>
+        <label>開心度 Happiness (−100～100) <input id="fHappy" type="number" min="-100" max="100" value="50" /></label>
+        <label>服從度 Discipline (0～100) <input id="fDisc" type="number" min="0" max="100" value="50" /></label>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+        <button type="button" class="btn" id="btnCalc">推算</button>
+        <button type="button" class="btn secondary" id="btnPresetAgumon">範例：亞古獸→暴龍獸</button>
+      </div>
+      <div id="calcResults" class="results"></div>
+    </section>
+
+    <section id="tab-rules" class="panel-block hidden" role="tabpanel">
+      <h2>判定規則（社群共識／SydMontague 資料）</h2>
+      <p>自然進化（進化圖上的線）把條件分成 <strong>4 類</strong>：</p>
+      <ol>
+        <li><strong>能力 Stats</strong>：列出的每一項都要 ≥ 要求；未列出的無視。進化到<strong>成長期</strong>時，還要「該 Digimon 要求的其中一項目前是最高能力」才算通過此類（HP／MP 比較時先 ÷10）。</li>
+        <li><strong>體重 Weight</strong>：落在目標體重 ±5g 範圍（資料庫已寫成區間）。</li>
+        <li><strong>照顧失誤 Care Mistakes</strong>：要滿足最少或最多失誤次數（每次進化會重置）。</li>
+        <li><strong>獎勵 Bonus</strong>：招式數／勝場／開心／服從／特定前階等條件中，<strong>只需滿足其中一項</strong>。</li>
+      </ol>
+      <p><strong>通過條件：4 類中至少通過 3 類</strong>，且經過對應時間（幼Ⅰ→Ⅱ約 6h、Ⅱ→成長 24h、成長→成熟 72h、成熟→完全 144h）才會觸發。</p>
+      <div class="warn">若多隻同時符合，遊戲會用優先度分數選一隻（本工具會列出全部候選並依通過數／契合排序，方便對照）。特殊進化（鼻涕獸、屎屎獸、Ｖ仔獸等）見「特殊進化」分頁。</div>
+      <p class="muted">資料主要依 SydMontague《Digimon World Evolution Guide》（由遊戲資料驗證）。實際遊戲內判定為準。</p>
+    </section>
+
+    <section id="tab-specials" class="panel-block hidden" role="tabpanel">
+      <h2>特殊進化</h2>
+      <div id="specialsRoot"></div>
+    </section>
+
+    <footer>
+      粉絲參考工具，非官方；進化以遊戲內實際判定為準。<br />
+      Sprites：Wikimon Digimon World 圖庫（縮圖本地化）。資料來源標註於「判定規則」。
+    </footer>
+  </div>
+
+  <script>
+  (() => {
+    const STAGE_ORDER = ["fresh","inTraining","rookie","champion","ultimate"];
+    const STAGE_LABEL = {
+      fresh: "幼年期Ⅰ Fresh",
+      inTraining: "幼年期Ⅱ In-Training",
+      rookie: "成長期 Rookie",
+      champion: "成熟期 Champion",
+      ultimate: "完全體 Ultimate",
+    };
+    let DB = null;
+    let byId = {};
+    let selectedId = null;
+
+    const $ = (s) => document.querySelector(s);
+
+    function spriteUrl(id) {
+      return `assets/sprites/${id}.png`;
+    }
+
+    function thumbHTML(id, size) {
+      const d = byId[id];
+      const label = d ? (d.zh || d.en) : id;
+      const initials = (d?.en || id).slice(0, 2).toUpperCase();
+      return `<div class="thumb" style="${size?`width:${size}px;height:${size}px`:''}">
+        <img src="${spriteUrl(id)}" alt="${label}" width="${size||48}" height="${size||48}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="fb" style="display:none">${initials}</div>
+      </div>`;
+    }
+
+    function fmtCare(care) {
+      if (!care) return "—";
+      return care.op === "lte" ? `≤ ${care.value}` : `≥ ${care.value}`;
+    }
+
+    function fmtStats(stats) {
+      if (!stats || !Object.keys(stats).length) return "（無特別要求）";
+      const map = {hp:"HP",mp:"MP",offense:"攻擊",defense:"防禦",speed:"速度",brains:"智力"};
+      return Object.entries(stats).map(([k,v]) => `${map[k]||k} ≥ ${v}`).join("、");
+    }
+
+    function fmtBonus(b) {
+      if (!b) return "—";
+      const parts = [];
+      if (b.techs != null) parts.push(`招式數 ≥ ${b.techs}`);
+      if (b.battlesMin != null) parts.push(`勝場 ≥ ${b.battlesMin}`);
+      if (b.battlesMax != null) parts.push(`勝場 ≤ ${b.battlesMax}`);
+      if (b.happiness != null) parts.push(`開心 ≥ ${b.happiness}`);
+      if (b.discipline != null) parts.push(`服從 ≥ ${b.discipline}`);
+      if (b.favoredFrom?.length) {
+        parts.push("前階為 " + b.favoredFrom.map(id => byId[id]?.zh || id).join("/"));
+      }
+      return parts.length ? parts.join("　或　") + "（滿足其一即可）" : "—";
+    }
+
+    function renderChart(filter = "") {
+      const root = $("#chartRoot");
+      const q = filter.trim().toLowerCase();
+      root.innerHTML = "";
+      for (const stage of STAGE_ORDER) {
+        const list = DB.digimon.filter(d => d.stage === stage).filter(d => {
+          if (!q) return true;
+          return (d.zh + d.en + d.id).toLowerCase().includes(q);
+        });
+        if (!list.length) continue;
+        const row = document.createElement("div");
+        row.className = "stage-row";
+        row.innerHTML = `<div class="stage-label">${STAGE_LABEL[stage]}</div>`;
+        const grid = document.createElement("div");
+        grid.className = "digi-grid";
+        for (const d of list) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "digi-card";
+          btn.dataset.id = d.id;
+          btn.innerHTML = `${thumbHTML(d.id)}<div class="name">${d.zh}</div><div class="en">${d.en}</div>`;
+          btn.addEventListener("click", () => selectDigimon(d.id));
+          grid.appendChild(btn);
+        }
+        row.appendChild(grid);
+        root.appendChild(row);
+      }
+      applyHighlight();
+    }
+
+    function relatedSet(id) {
+      const d = byId[id];
+      if (!d) return new Set();
+      const s = new Set([id]);
+      (d.evolvesFrom || []).forEach(x => s.add(x));
+      (d.evolvesTo || []).forEach(x => s.add(x));
+      // also one hop for chart clarity
+      (d.evolvesFrom || []).forEach(fid => (byId[fid]?.evolvesFrom || []).forEach(x => s.add(x)));
+      (d.evolvesTo || []).forEach(tid => (byId[tid]?.evolvesTo || []).forEach(x => s.add(x)));
+      return s;
+    }
+
+    function applyHighlight() {
+      const cards = document.querySelectorAll(".digi-card");
+      if (!selectedId) {
+        cards.forEach(c => c.classList.remove("active","dim","related"));
+        return;
+      }
+      const rel = relatedSet(selectedId);
+      cards.forEach(c => {
+        const id = c.dataset.id;
+        c.classList.toggle("active", id === selectedId);
+        c.classList.toggle("related", rel.has(id) && id !== selectedId);
+        c.classList.toggle("dim", !rel.has(id));
+      });
+    }
+
+    function pathChips(ids, emptyText) {
+      if (!ids?.length) return `<span class="muted">${emptyText}</span>`;
+      return `<div class="path-list">${ids.map(id => {
+        const d = byId[id];
+        return `<button type="button" class="path-chip" data-goto="${id}">
+          <img src="${spriteUrl(id)}" alt="" width="28" height="28"
+            onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${(d?.en||id).slice(0,2)}',style:'width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;background:#1a2a44;border-radius:8px;font-size:10px'}))" />
+          ${d?.zh || id} <span class="muted">(${d?.en || id})</span>
+        </button>`;
+      }).join("")}</div>`;
+    }
+
+    function selectDigimon(id) {
+      selectedId = id;
+      applyHighlight();
+      const d = byId[id];
+      const panel = $("#detailPanel");
+      if (!d) { panel.classList.remove("show"); return; }
+      const req = d.req;
+      let reqBlock = "";
+      if (req?.auto) {
+        reqBlock = `<p>${req.note || "自動進化"}（約 ${req.timeHours} 小時）</p>`;
+      } else if (req) {
+        reqBlock = `
+          <table class="req-table">
+            <tr><th>能力</th><td>${fmtStats(req.stats)}${req.highestStatKeys ? `<br><span class="muted">成長期規則：要求項之一須為目前最高能力</span>` : ""}</td></tr>
+            <tr><th>體重</th><td>${req.weight ? `${req.weight[0]}–${req.weight[1]} g` : "—"}</td></tr>
+            <tr><th>照顧失誤</th><td>${fmtCare(req.care)}</td></tr>
+            <tr><th>獎勵（擇一）</th><td>${fmtBonus(req.bonus)}</td></tr>
+            <tr><th>時間門檻</th><td>${req.timeHours != null ? `約 ${req.timeHours} 小時` : "—"}</td></tr>
+          </table>
+          <p class="muted">進化<strong>成</strong>此 Digimon 時的自然條件（需通過 4 類中 3 類）。</p>`;
+      } else {
+        reqBlock = `<p class="muted">此形態多為特殊進化入口，或沒有標準自然條件表（見特殊進化）。</p>`;
+      }
+      panel.innerHTML = `
+        <div class="detail-head">
+          ${thumbHTML(d.id, 64)}
+          <div>
+            <strong style="font-size:1.15rem">${d.zh}</strong>
+            <div class="muted">${d.en} · ${STAGE_LABEL[d.stage]}</div>
+          </div>
+        </div>
+        <h3>進化自</h3>
+        ${pathChips(d.evolvesFrom, "無（蛋／特殊）")}
+        <h3>可進化至</h3>
+        ${pathChips(d.evolvesTo, "無（終點或特殊）")}
+        <h3>進化條件（目標為此 Digimon）</h3>
+        ${reqBlock}
+        <div style="margin-top:10px">
+          <button type="button" class="btn secondary" id="useInCalc">用此 Digimon 做推算</button>
+        </div>`;
+      panel.classList.add("show");
+      panel.querySelectorAll("[data-goto]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          selectDigimon(btn.dataset.goto);
+          document.querySelector(`.digi-card[data-id="${btn.dataset.goto}"]`)?.scrollIntoView({behavior:"smooth", block:"center"});
+        });
+      });
+      $("#useInCalc")?.addEventListener("click", () => {
+        $("#curDigimon").value = d.id;
+        switchTab("calc");
+      });
+    }
+
+    function switchTab(name) {
+      document.querySelectorAll(".tabs button").forEach(b => {
+        const on = b.dataset.tab === name;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      ["chart","calc","rules","specials"].forEach(t => {
+        $(`#tab-${t}`).classList.toggle("hidden", t !== name);
+      });
+    }
+
+    function evalCare(care, value) {
+      if (!care) return { ok: true, detail: "無要求" };
+      const ok = care.op === "lte" ? value <= care.value : value >= care.value;
+      return { ok, detail: `${value}（需要 ${fmtCare(care)}）` };
+    }
+
+    function evalWeight(range, value) {
+      if (!range) return { ok: true, detail: "無要求" };
+      const ok = value >= range[0] && value <= range[1];
+      return { ok, detail: `${value}g（需要 ${range[0]}–${range[1]}g）` };
+    }
+
+    function evalStats(req, stats, isRookieTarget) {
+      const need = req.stats || {};
+      const keys = Object.keys(need);
+      if (!keys.length) return { ok: true, detail: "無能力門檻", score: 0 };
+
+      const labels = {hp:"HP",mp:"MP",offense:"攻擊",defense:"防禦",speed:"速度",brains:"智力"};
+      const parts = [];
+      let allMet = true;
+      let excess = 0;
+      for (const k of keys) {
+        const cur = stats[k];
+        const needV = need[k];
+        const met = cur >= needV;
+        if (!met) allMet = false;
+        else excess += (cur - needV);
+        parts.push(`${labels[k]} ${cur}/${needV}${met ? "✓" : "✗"}`);
+      }
+
+      let ok = allMet;
+      let extra = "";
+      if (isRookieTarget && req.highestStatKeys?.length) {
+        // compare with HP/MP /10
+        const cmp = {
+          hp: stats.hp / 10,
+          mp: stats.mp / 10,
+          offense: stats.offense,
+          defense: stats.defense,
+          speed: stats.speed,
+          brains: stats.brains,
+        };
+        const maxVal = Math.max(...Object.values(cmp));
+        const hasHighest = req.highestStatKeys.some(k => Math.abs(cmp[k] - maxVal) < 1e-9);
+        if (!hasHighest) {
+          ok = false;
+          extra = "；且要求項並非目前最高能力";
+        } else {
+          extra = "；最高能力落在要求項";
+        }
+      }
+      return { ok, detail: parts.join("、") + extra, score: ok ? excess : -1 };
+    }
+
+    function evalBonus(bonus, ctx) {
+      if (!bonus) return { ok: true, detail: "無獎勵條件", hits: [] };
+      const hits = [];
+      if (bonus.techs != null) {
+        const ok = ctx.techs >= bonus.techs;
+        hits.push({ ok, text: `招式 ${ctx.techs} ≥ ${bonus.techs}` });
+      }
+      if (bonus.battlesMin != null) {
+        const ok = ctx.battles >= bonus.battlesMin;
+        hits.push({ ok, text: `勝場 ${ctx.battles} ≥ ${bonus.battlesMin}` });
+      }
+      if (bonus.battlesMax != null) {
+        const ok = ctx.battles <= bonus.battlesMax;
+        hits.push({ ok, text: `勝場 ${ctx.battles} ≤ ${bonus.battlesMax}` });
+      }
+      if (bonus.happiness != null) {
+        const ok = ctx.happy >= bonus.happiness;
+        hits.push({ ok, text: `開心 ${ctx.happy} ≥ ${bonus.happiness}` });
+      }
+      if (bonus.discipline != null) {
+        const ok = ctx.disc >= bonus.discipline;
+        hits.push({ ok, text: `服從 ${ctx.disc} ≥ ${bonus.discipline}` });
+      }
+      if (bonus.favoredFrom?.length) {
+        const ok = bonus.favoredFrom.includes(ctx.currentId);
+        hits.push({ ok, text: `前階加成（${bonus.favoredFrom.map(i=>byId[i]?.zh||i).join("/")}）${ok?"✓":"✗"}` });
+      }
+      if (!hits.length) return { ok: true, detail: "無獎勵條件", hits };
+      const ok = hits.some(h => h.ok);
+      return { ok, detail: hits.map(h => (h.ok?"✓ ":"✗ ") + h.text).join("；"), hits };
+    }
+
+    function canEvolveFrom(currentId, target) {
+      const cur = byId[currentId];
+      if (!cur) return false;
+      // natural chart edge
+      if ((cur.evolvesTo || []).includes(target.id)) return true;
+      // Fresh auto to their only form
+      if (cur.stage === "fresh" && (cur.evolvesTo || []).includes(target.id)) return true;
+      return false;
+    }
+
+    function readForm() {
+      return {
+        currentId: $("#curDigimon").value,
+        hp: +$("#fHp").value || 0,
+        mp: +$("#fMp").value || 0,
+        offense: +$("#fOff").value || 0,
+        defense: +$("#fDef").value || 0,
+        speed: +$("#fSpd").value || 0,
+        brains: +$("#fBrains").value || 0,
+        weight: +$("#fWeight").value || 0,
+        care: +$("#fCare").value || 0,
+        battles: +$("#fBattles").value || 0,
+        techs: +$("#fTechs").value || 0,
+        happy: +$("#fHappy").value || 0,
+        disc: +$("#fDisc").value || 0,
+      };
+    }
+
+    function calculate() {
+      const f = readForm();
+      const cur = byId[f.currentId];
+      const resultsEl = $("#calcResults");
+      if (!cur) { resultsEl.innerHTML = `<p class="warn">請選擇目前 Digimon</p>`; return; }
+
+      // Fresh: only auto next
+      if (cur.stage === "fresh") {
+        const next = (cur.evolvesTo || []).map(id => byId[id]).filter(Boolean);
+        resultsEl.innerHTML = `<div class="note">幼年期Ⅰ約 6 小時後<strong>必定</strong>進化為：</div>` +
+          next.map(d => `<div class="result-card ok"><div class="result-top">${thumbHTML(d.id)}<div><strong>${d.zh}</strong> <span class="muted">${d.en}</span><div class="pass">自動進化</div></div></div></div>`).join("");
+        return;
+      }
+
+      const candidates = DB.digimon.filter(t => {
+        if (!t.req || t.req.auto) return false;
+        return canEvolveFrom(f.currentId, t);
+      });
+
+      const stats = { hp:f.hp, mp:f.mp, offense:f.offense, defense:f.defense, speed:f.speed, brains:f.brains };
+      const evaluated = candidates.map(t => {
+        const isRookieTarget = t.stage === "rookie";
+        const st = evalStats(t.req, stats, isRookieTarget);
+        const wt = evalWeight(t.req.weight, f.weight);
+        const cr = evalCare(t.req.care, f.care);
+        const bn = evalBonus(t.req.bonus, f);
+        const cats = [
+          { name: "能力", ...st },
+          { name: "體重", ...wt },
+          { name: "照顧失誤", ...cr },
+          { name: "獎勵", ...bn },
+        ];
+        const passed = cats.filter(c => c.ok).length;
+        const eligible = passed >= 3;
+        return { t, cats, passed, eligible, score: (st.score || 0) + passed * 1000 };
+      });
+
+      evaluated.sort((a, b) => {
+        if (a.eligible !== b.eligible) return a.eligible ? -1 : 1;
+        if (b.passed !== a.passed) return b.passed - a.passed;
+        return b.score - a.score;
+      });
+
+      // Also mention special fallbacks briefly
+      let extra = "";
+      if (cur.stage === "rookie") {
+        extra = `<div class="warn">若成長期約 96 小時仍無自然進化，可能變成<strong>鼻涕獸 Numemon</strong>（特殊）。病毒條滿則變<strong>屎屎獸</strong>。</div>`;
+      } else if (cur.stage === "champion") {
+        extra = `<div class="warn">成熟期過久（≥240h 褒罵／360h 強制）可能變成<strong>Ｖ仔獸 Vademon</strong>（特殊）。</div>`;
+      }
+
+      if (!evaluated.length) {
+        resultsEl.innerHTML = `<p class="warn">目前形態在進化圖上沒有標準下一階（可能是完全體終點，或僅能走特殊進化）。</p>${extra}`;
+        return;
+      }
+
+      resultsEl.innerHTML = extra + evaluated.map(({ t, cats, passed, eligible }) => {
+        const cls = eligible ? "ok" : (passed === 2 ? "near" : "fail");
+        return `<div class="result-card ${cls}">
+          <div class="result-top">
+            ${thumbHTML(t.id)}
+            <div>
+              <strong>${t.zh}</strong> <span class="muted">${t.en}</span>
+              <div>${eligible ? `<span class="pass">可進化候選（${passed}/4）</span>` : `<span class="failc">尚未達標（${passed}/4）</span>`}</div>
+            </div>
+          </div>
+          <ul class="crit-list">
+            ${cats.map(c => `<li><span>${c.name}</span><span class="${c.ok?"pass":"failc"}">${c.ok?"通過":"未過"} · ${c.detail}</span></li>`).join("")}
+          </ul>
+        </div>`;
+      }).join("");
+    }
+
+    function fillSelect() {
+      const sel = $("#curDigimon");
+      sel.innerHTML = STAGE_ORDER.map(stage => {
+        const opts = DB.digimon.filter(d => d.stage === stage)
+          .map(d => `<option value="${d.id}">${d.zh}（${d.en}）</option>`).join("");
+        return `<optgroup label="${STAGE_LABEL[stage]}">${opts}</optgroup>`;
+      }).join("");
+      sel.value = "agumon";
+    }
+
+    function renderSpecials() {
+      const root = $("#specialsRoot");
+      root.innerHTML = `<table class="req-table"><thead><tr><th>目標</th><th>來源</th><th>條件</th><th>備註</th></tr></thead><tbody>` +
+        DB.specials.map(s => {
+          const to = byId[s.to];
+          let fromLabel = s.from;
+          if (Array.isArray(s.from)) fromLabel = s.from.map(i => byId[i]?.zh || i).join("、");
+          else if (s.from === "any") fromLabel = "任何";
+          else if (s.from === "inTraining") fromLabel = "幼年期Ⅱ";
+          else if (s.from === "rookie") fromLabel = "成長期";
+          else if (s.from === "champion") fromLabel = "成熟期";
+          else if (byId[s.from]) fromLabel = byId[s.from].zh;
+          return `<tr>
+            <td>${to ? to.zh + "（" + to.en + "）" : s.to}</td>
+            <td>${fromLabel}</td>
+            <td>${s.condition}</td>
+            <td>${s.note || ""}</td>
+          </tr>`;
+        }).join("") + `</tbody></table>`;
+    }
+
+    function presetGreymon() {
+      $("#curDigimon").value = "agumon";
+      $("#fHp").value = 1600;
+      $("#fMp").value = 900;
+      $("#fOff").value = 160;
+      $("#fDef").value = 120;
+      $("#fSpd").value = 120;
+      $("#fBrains").value = 120;
+      $("#fWeight").value = 30;
+      $("#fCare").value = 0;
+      $("#fBattles").value = 5;
+      $("#fTechs").value = 35;
+      $("#fHappy").value = 50;
+      $("#fDisc").value = 90;
+      calculate();
+    }
+
+    async function init() {
+      const res = await fetch("data/evolution.json");
+      DB = await res.json();
+      byId = Object.fromEntries(DB.digimon.map(d => [d.id, d]));
+      $("#dbCount").textContent = `${DB.meta.count} 隻 Digimon`;
+      renderChart();
+      fillSelect();
+      renderSpecials();
+
+      document.querySelectorAll(".tabs button").forEach(b => {
+        b.addEventListener("click", () => switchTab(b.dataset.tab));
+      });
+      $("#chartSearch").addEventListener("input", (e) => renderChart(e.target.value));
+      $("#clearHighlight").addEventListener("click", () => {
+        selectedId = null;
+        $("#detailPanel").classList.remove("show");
+        applyHighlight();
+      });
+      $("#btnCalc").addEventListener("click", calculate);
+      $("#btnPresetAgumon").addEventListener("click", presetGreymon);
+    }
+
+    init().catch(err => {
+      document.body.insertAdjacentHTML("afterbegin",
+        `<div class="warn" style="margin:16px">載入資料失敗：${err.message}（請用本地伺服器或 GitHub Pages 開啟，勿直接 file://）</div>`);
+    });
+  })();
+  </script>
+</body>
+</html>

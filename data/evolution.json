@@ -1,0 +1,1985 @@
+{
+  "meta": {
+    "game": "Digimon World (PS1, 1999)",
+    "matchingRule": "natural: fulfill 3 of 4 categories — stats, weight, careMistakes, bonus. Bonus needs any ONE listed bonus condition. Weight range already encodes ±5g of target. Rookie targets: stats category only counts if one of the Digimon's required stats is currently highest (HP/MP compared as value/10).",
+    "source": "SydMontague Digimon World Evolution Guide (GameFAQs / game-data research)",
+    "count": 61
+  },
+  "stages": [
+    {
+      "id": "fresh",
+      "zh": "幼年期Ⅰ",
+      "en": "Fresh",
+      "timeToNext": 6
+    },
+    {
+      "id": "inTraining",
+      "zh": "幼年期Ⅱ",
+      "en": "In-Training",
+      "timeToNext": 24
+    },
+    {
+      "id": "rookie",
+      "zh": "成長期",
+      "en": "Rookie",
+      "timeToNext": 72
+    },
+    {
+      "id": "champion",
+      "zh": "成熟期",
+      "en": "Champion",
+      "timeToNext": 144
+    },
+    {
+      "id": "ultimate",
+      "zh": "完全體",
+      "en": "Ultimate",
+      "timeToNext": null
+    }
+  ],
+  "digimon": [
+    {
+      "id": "botamon",
+      "en": "Botamon",
+      "zh": "波塔獸",
+      "stage": "fresh",
+      "evolvesTo": [
+        "koromon"
+      ],
+      "evolvesFrom": [],
+      "special": false,
+      "req": {
+        "auto": true,
+        "timeHours": 6,
+        "note": "約 6 小時後必定進化"
+      }
+    },
+    {
+      "id": "poyomon",
+      "en": "Poyomon",
+      "zh": "泡泡獸",
+      "stage": "fresh",
+      "evolvesTo": [
+        "tokomon"
+      ],
+      "evolvesFrom": [],
+      "special": false,
+      "req": {
+        "auto": true,
+        "timeHours": 6,
+        "note": "約 6 小時後必定進化"
+      }
+    },
+    {
+      "id": "punimon",
+      "en": "Punimon",
+      "zh": "針狀獸",
+      "stage": "fresh",
+      "evolvesTo": [
+        "tsunomon"
+      ],
+      "evolvesFrom": [],
+      "special": false,
+      "req": {
+        "auto": true,
+        "timeHours": 6,
+        "note": "約 6 小時後必定進化"
+      }
+    },
+    {
+      "id": "yuramon",
+      "en": "Yuramon",
+      "zh": "滾球獸",
+      "stage": "fresh",
+      "evolvesTo": [
+        "tanemon"
+      ],
+      "evolvesFrom": [],
+      "special": false,
+      "req": {
+        "auto": true,
+        "timeHours": 6,
+        "note": "約 6 小時後必定進化"
+      }
+    },
+    {
+      "id": "koromon",
+      "en": "Koromon",
+      "zh": "可樂獸",
+      "stage": "inTraining",
+      "evolvesTo": [
+        "agumon",
+        "gabumon"
+      ],
+      "evolvesFrom": [
+        "botamon"
+      ]
+    },
+    {
+      "id": "tokomon",
+      "en": "Tokomon",
+      "zh": "針球獸",
+      "stage": "inTraining",
+      "evolvesTo": [
+        "patamon",
+        "biyomon"
+      ],
+      "evolvesFrom": [
+        "poyomon"
+      ]
+    },
+    {
+      "id": "tsunomon",
+      "en": "Tsunomon",
+      "zh": "角球獸",
+      "stage": "inTraining",
+      "evolvesTo": [
+        "elecmon",
+        "penguinmon"
+      ],
+      "evolvesFrom": [
+        "punimon"
+      ]
+    },
+    {
+      "id": "tanemon",
+      "en": "Tanemon",
+      "zh": "種子獸",
+      "stage": "inTraining",
+      "evolvesTo": [
+        "palmon",
+        "betamon"
+      ],
+      "evolvesFrom": [
+        "yuramon"
+      ]
+    },
+    {
+      "id": "agumon",
+      "en": "Agumon",
+      "zh": "亞古獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "greymon",
+        "meramon",
+        "birdramon",
+        "centarumon",
+        "monochromon",
+        "tyrannomon"
+      ],
+      "evolvesFrom": [
+        "koromon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 10,
+          "mp": 10,
+          "offense": 1
+        },
+        "highestStatKeys": [
+          "hp",
+          "mp",
+          "offense"
+        ],
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "gte",
+          "value": 0
+        },
+        "bonus": {
+          "favoredFrom": [
+            "koromon"
+          ]
+        },
+        "timeHours": 24
+      }
+    },
+    {
+      "id": "gabumon",
+      "en": "Gabumon",
+      "zh": "加布獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "centarumon",
+        "monochromon",
+        "drimogemon",
+        "tyrannomon",
+        "ogremon",
+        "garurumon"
+      ],
+      "evolvesFrom": [
+        "koromon"
+      ],
+      "req": {
+        "stats": {
+          "defense": 1,
+          "speed": 1,
+          "brains": 1
+        },
+        "highestStatKeys": [
+          "defense",
+          "speed",
+          "brains"
+        ],
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "gte",
+          "value": 0
+        },
+        "bonus": {
+          "techs": 0,
+          "favoredFrom": [
+            "koromon"
+          ]
+        },
+        "timeHours": 24
+      }
+    },
+    {
+      "id": "patamon",
+      "en": "Patamon",
+      "zh": "巴達獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "drimogemon",
+        "tyrannomon",
+        "ogremon",
+        "leomon",
+        "angemon",
+        "unimon"
+      ],
+      "evolvesFrom": [
+        "tokomon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 10,
+          "offense": 1,
+          "brains": 1
+        },
+        "highestStatKeys": [
+          "hp",
+          "offense",
+          "brains"
+        ],
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "gte",
+          "value": 0
+        },
+        "bonus": {
+          "techs": 0,
+          "favoredFrom": [
+            "tokomon"
+          ]
+        },
+        "timeHours": 24
+      }
+    },
+    {
+      "id": "elecmon",
+      "en": "Elecmon",
+      "zh": "艾力獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "leomon",
+        "angemon",
+        "bakemon",
+        "kokatorimon"
+      ],
+      "evolvesFrom": [
+        "tsunomon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 10,
+          "offense": 1,
+          "speed": 1
+        },
+        "highestStatKeys": [
+          "hp",
+          "offense",
+          "speed"
+        ],
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "gte",
+          "value": 0
+        },
+        "bonus": {
+          "techs": 0,
+          "favoredFrom": [
+            "tsunomon"
+          ]
+        },
+        "timeHours": 24
+      }
+    },
+    {
+      "id": "biyomon",
+      "en": "Biyomon",
+      "zh": "比丘獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "birdramon",
+        "airdramon",
+        "kokatorimon",
+        "unimon",
+        "kabuterimon"
+      ],
+      "evolvesFrom": [
+        "tokomon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 10,
+          "defense": 1,
+          "speed": 1
+        },
+        "highestStatKeys": [
+          "mp",
+          "defense",
+          "speed"
+        ],
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "gte",
+          "value": 0
+        },
+        "bonus": {
+          "techs": 0,
+          "favoredFrom": [
+            "tokomon"
+          ]
+        },
+        "timeHours": 24
+      }
+    },
+    {
+      "id": "kunemon",
+      "en": "Kunemon",
+      "zh": "古內門獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "bakemon",
+        "kabuterimon",
+        "kuwagamon",
+        "vegiemon"
+      ],
+      "evolvesFrom": [],
+      "specialNote": "幼年期Ⅱ睡在古內門床有機會進化"
+    },
+    {
+      "id": "palmon",
+      "en": "Palmon",
+      "zh": "巴魯獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "kuwagamon",
+        "vegiemon",
+        "ninjamon",
+        "whamon",
+        "coelamon"
+      ],
+      "evolvesFrom": [
+        "tanemon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 10,
+          "speed": 1,
+          "brains": 1
+        },
+        "highestStatKeys": [
+          "mp",
+          "speed",
+          "brains"
+        ],
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "gte",
+          "value": 0
+        },
+        "bonus": {
+          "techs": 0,
+          "favoredFrom": [
+            "tanemon"
+          ]
+        },
+        "timeHours": 24
+      }
+    },
+    {
+      "id": "betamon",
+      "en": "Betamon",
+      "zh": "貝塔獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "seadramon",
+        "whamon",
+        "shellmon",
+        "coelamon"
+      ],
+      "evolvesFrom": [
+        "tanemon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 10,
+          "mp": 10,
+          "defense": 1
+        },
+        "highestStatKeys": [
+          "hp",
+          "mp",
+          "defense"
+        ],
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "gte",
+          "value": 0
+        },
+        "bonus": {
+          "techs": 0,
+          "favoredFrom": [
+            "tanemon"
+          ]
+        },
+        "timeHours": 24
+      }
+    },
+    {
+      "id": "penguinmon",
+      "en": "Penguinmon",
+      "zh": "企鵝獸",
+      "stage": "rookie",
+      "evolvesTo": [
+        "whamon",
+        "shellmon",
+        "garurumon",
+        "frigimon",
+        "mojyamon"
+      ],
+      "evolvesFrom": [
+        "tsunomon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 10,
+          "defense": 1,
+          "brains": 1
+        },
+        "highestStatKeys": [
+          "mp",
+          "defense",
+          "brains"
+        ],
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "gte",
+          "value": 0
+        },
+        "bonus": {
+          "techs": 0,
+          "favoredFrom": [
+            "tsunomon"
+          ]
+        },
+        "timeHours": 24
+      }
+    },
+    {
+      "id": "greymon",
+      "en": "Greymon",
+      "zh": "暴龍獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "metalgreymon",
+        "skullgreymon"
+      ],
+      "evolvesFrom": [
+        "agumon"
+      ],
+      "req": {
+        "stats": {
+          "offense": 100,
+          "defense": 100,
+          "speed": 100,
+          "brains": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 1
+        },
+        "bonus": {
+          "discipline": 90,
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "meramon",
+      "en": "Meramon",
+      "zh": "火焰獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "metalgreymon",
+        "andromon"
+      ],
+      "evolvesFrom": [
+        "agumon"
+      ],
+      "req": {
+        "stats": {
+          "offense": 100
+        },
+        "weight": [
+          15,
+          25
+        ],
+        "care": {
+          "op": "gte",
+          "value": 5
+        },
+        "bonus": {
+          "battlesMin": 10,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "birdramon",
+      "en": "Birdramon",
+      "zh": "巴多拉獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "phoenixmon"
+      ],
+      "evolvesFrom": [
+        "agumon",
+        "biyomon"
+      ],
+      "req": {
+        "stats": {
+          "speed": 100
+        },
+        "weight": [
+          15,
+          25
+        ],
+        "care": {
+          "op": "gte",
+          "value": 3
+        },
+        "bonus": {
+          "favoredFrom": [
+            "biyomon"
+          ],
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "centarumon",
+      "en": "Centarumon",
+      "zh": "人馬獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "andromon",
+        "giromon"
+      ],
+      "evolvesFrom": [
+        "agumon",
+        "gabumon"
+      ],
+      "req": {
+        "stats": {
+          "brains": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 3
+        },
+        "bonus": {
+          "discipline": 60,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "monochromon",
+      "en": "Monochromon",
+      "zh": "獨角龍獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "metalgreymon",
+        "metalmamemon"
+      ],
+      "evolvesFrom": [
+        "agumon",
+        "gabumon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "defense": 100,
+          "brains": 100
+        },
+        "weight": [
+          35,
+          45
+        ],
+        "care": {
+          "op": "lte",
+          "value": 3
+        },
+        "bonus": {
+          "battlesMax": 5,
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "drimogemon",
+      "en": "Drimogemon",
+      "zh": "鑽地獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "metalgreymon"
+      ],
+      "evolvesFrom": [
+        "gabumon",
+        "patamon"
+      ],
+      "req": {
+        "stats": {
+          "offense": 100
+        },
+        "weight": [
+          35,
+          45
+        ],
+        "care": {
+          "op": "gte",
+          "value": 3
+        },
+        "bonus": {
+          "happiness": 50,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "tyrannomon",
+      "en": "Tyrannomon",
+      "zh": "恐龍獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "metalgreymon",
+        "megadramon"
+      ],
+      "evolvesFrom": [
+        "agumon",
+        "gabumon",
+        "patamon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "defense": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 5
+        },
+        "bonus": {
+          "battlesMax": 5,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "devimon",
+      "en": "Devimon",
+      "zh": "惡魔獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "skullgreymon",
+        "megadramon"
+      ],
+      "evolvesFrom": []
+    },
+    {
+      "id": "ogremon",
+      "en": "Ogremon",
+      "zh": "奧加獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "andromon",
+        "giromon"
+      ],
+      "evolvesFrom": [
+        "gabumon",
+        "patamon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "offense": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "gte",
+          "value": 5
+        },
+        "bonus": {
+          "battlesMin": 15,
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "leomon",
+      "en": "Leomon",
+      "zh": "獅子獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "andromon",
+        "mamemon"
+      ],
+      "evolvesFrom": [
+        "patamon",
+        "elecmon"
+      ],
+      "req": {
+        "stats": {
+          "offense": 100,
+          "speed": 100,
+          "brains": 100
+        },
+        "weight": [
+          15,
+          25
+        ],
+        "care": {
+          "op": "lte",
+          "value": 1
+        },
+        "bonus": {
+          "battlesMin": 10,
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "angemon",
+      "en": "Angemon",
+      "zh": "天使獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "andromon",
+        "phoenixmon"
+      ],
+      "evolvesFrom": [
+        "patamon",
+        "elecmon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 1000,
+          "brains": 100
+        },
+        "weight": [
+          15,
+          25
+        ],
+        "care": {
+          "op": "lte",
+          "value": 0
+        },
+        "bonus": {
+          "favoredFrom": [
+            "patamon"
+          ],
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "bakemon",
+      "en": "Bakemon",
+      "zh": "鬼魂獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "skullgreymon",
+        "giromon"
+      ],
+      "evolvesFrom": [
+        "elecmon",
+        "kunemon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 1000
+        },
+        "weight": [
+          15,
+          25
+        ],
+        "care": {
+          "op": "gte",
+          "value": 3
+        },
+        "bonus": {
+          "happiness": 50,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "airdramon",
+      "en": "Airdramon",
+      "zh": "飛龍獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "megadramon",
+        "phoenixmon"
+      ],
+      "evolvesFrom": [
+        "biyomon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 1000,
+          "speed": 100,
+          "brains": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 1
+        },
+        "bonus": {
+          "discipline": 90,
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "kokatorimon",
+      "en": "Kokatorimon",
+      "zh": "可可特拉獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "phoenixmon",
+        "piximon"
+      ],
+      "evolvesFrom": [
+        "elecmon",
+        "biyomon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "gte",
+          "value": 3
+        },
+        "bonus": {
+          "favoredFrom": [
+            "biyomon"
+          ],
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "unimon",
+      "en": "Unimon",
+      "zh": "獨角馬獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "giromon",
+        "phoenixmon"
+      ],
+      "evolvesFrom": [
+        "patamon",
+        "biyomon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "speed": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 3
+        },
+        "bonus": {
+          "battlesMin": 10,
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "kabuterimon",
+      "en": "Kabuterimon",
+      "zh": "甲蟲獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "hkabuterimon",
+        "metalmamemon"
+      ],
+      "evolvesFrom": [
+        "biyomon",
+        "kunemon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "mp": 1000,
+          "offense": 100,
+          "speed": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 1
+        },
+        "bonus": {
+          "favoredFrom": [
+            "kunemon"
+          ],
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "kuwagamon",
+      "en": "Kuwagamon",
+      "zh": "古加獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "hkabuterimon",
+        "piximon"
+      ],
+      "evolvesFrom": [
+        "kunemon",
+        "palmon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "mp": 1000,
+          "offense": 100,
+          "speed": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "gte",
+          "value": 5
+        },
+        "bonus": {
+          "favoredFrom": [
+            "kunemon"
+          ],
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "vegiemon",
+      "en": "Vegiemon",
+      "zh": "蔬菜怪獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "piximon"
+      ],
+      "evolvesFrom": [
+        "kunemon",
+        "palmon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 1000
+        },
+        "weight": [
+          5,
+          15
+        ],
+        "care": {
+          "op": "gte",
+          "value": 5
+        },
+        "bonus": {
+          "happiness": 50,
+          "techs": 21
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "ninjamon",
+      "en": "Ninjamon",
+      "zh": "忍者獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "piximon",
+        "metalmamemon",
+        "mamemon"
+      ],
+      "evolvesFrom": [
+        "palmon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 1000,
+          "offense": 100,
+          "speed": 100
+        },
+        "weight": [
+          5,
+          15
+        ],
+        "care": {
+          "op": "lte",
+          "value": 1
+        },
+        "bonus": {
+          "battlesMin": 15,
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "seadramon",
+      "en": "Seadramon",
+      "zh": "海龍獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "megadramon",
+        "megaseadramon"
+      ],
+      "evolvesFrom": [
+        "betamon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "mp": 1000
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "gte",
+          "value": 3
+        },
+        "bonus": {
+          "battlesMax": 5,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "whamon",
+      "en": "Whamon",
+      "zh": "鯨獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "megaseadramon",
+        "mamemon"
+      ],
+      "evolvesFrom": [
+        "palmon",
+        "betamon",
+        "penguinmon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "brains": 100
+        },
+        "weight": [
+          35,
+          45
+        ],
+        "care": {
+          "op": "lte",
+          "value": 5
+        },
+        "bonus": {
+          "discipline": 60,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "shellmon",
+      "en": "Shellmon",
+      "zh": "貝殼獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "hkabuterimon",
+        "megaseadramon"
+      ],
+      "evolvesFrom": [
+        "betamon",
+        "penguinmon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000,
+          "defense": 100
+        },
+        "weight": [
+          35,
+          45
+        ],
+        "care": {
+          "op": "gte",
+          "value": 5
+        },
+        "bonus": {
+          "favoredFrom": [
+            "betamon"
+          ],
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "coelamon",
+      "en": "Coelamon",
+      "zh": "甲魚獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "megaseadramon"
+      ],
+      "evolvesFrom": [
+        "palmon",
+        "betamon"
+      ],
+      "req": {
+        "stats": {
+          "defense": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "gte",
+          "value": 3
+        },
+        "bonus": {
+          "battlesMax": 5,
+          "techs": 35
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "garurumon",
+      "en": "Garurumon",
+      "zh": "加魯魯獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "skullgreymon",
+        "megaseadramon"
+      ],
+      "evolvesFrom": [
+        "gabumon",
+        "penguinmon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 1000,
+          "speed": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 1
+        },
+        "bonus": {
+          "discipline": 90,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "frigimon",
+      "en": "Frigimon",
+      "zh": "雪人獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "metalmamemon",
+        "mamemon"
+      ],
+      "evolvesFrom": [
+        "penguinmon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 1000,
+          "brains": 100
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 5
+        },
+        "bonus": {
+          "happiness": 50,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "mojyamon",
+      "en": "Mojyamon",
+      "zh": "毛人獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "skullgreymon",
+        "mamemon"
+      ],
+      "evolvesFrom": [
+        "penguinmon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 1000
+        },
+        "weight": [
+          15,
+          25
+        ],
+        "care": {
+          "op": "gte",
+          "value": 5
+        },
+        "bonus": {
+          "battlesMax": 5,
+          "techs": 28
+        },
+        "timeHours": 72
+      }
+    },
+    {
+      "id": "numemon",
+      "en": "Numemon",
+      "zh": "鼻涕獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "monzaemon"
+      ],
+      "evolvesFrom": []
+    },
+    {
+      "id": "sukamon",
+      "en": "Sukamon",
+      "zh": "屎屎獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "etemon"
+      ],
+      "evolvesFrom": []
+    },
+    {
+      "id": "nanimon",
+      "en": "Nanimon",
+      "zh": "什麼獸",
+      "stage": "champion",
+      "evolvesTo": [
+        "digitamamon"
+      ],
+      "evolvesFrom": []
+    },
+    {
+      "id": "metalgreymon",
+      "en": "MetalGreymon",
+      "zh": "機械暴龍獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "greymon",
+        "meramon",
+        "monochromon",
+        "drimogemon",
+        "tyrannomon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 4000,
+          "mp": 3000,
+          "offense": 500,
+          "defense": 500,
+          "speed": 300,
+          "brains": 300
+        },
+        "weight": [
+          60,
+          70
+        ],
+        "care": {
+          "op": "lte",
+          "value": 10
+        },
+        "bonus": {
+          "discipline": 95,
+          "battlesMin": 30,
+          "techs": 30
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "andromon",
+      "en": "Andromon",
+      "zh": "安杜路獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "meramon",
+        "centarumon",
+        "ogremon",
+        "leomon",
+        "angemon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 2000,
+          "mp": 4000,
+          "offense": 200,
+          "defense": 400,
+          "speed": 200,
+          "brains": 400
+        },
+        "weight": [
+          35,
+          45
+        ],
+        "care": {
+          "op": "lte",
+          "value": 5
+        },
+        "bonus": {
+          "discipline": 95,
+          "battlesMin": 30,
+          "techs": 30
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "skullgreymon",
+      "en": "SkullGreymon",
+      "zh": "骷髏暴龍獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "greymon",
+        "devimon",
+        "bakemon",
+        "garurumon",
+        "mojyamon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 4000,
+          "mp": 6000,
+          "offense": 400,
+          "defense": 400,
+          "speed": 200,
+          "brains": 500
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "gte",
+          "value": 10
+        },
+        "bonus": {
+          "battlesMin": 40,
+          "techs": 45
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "megadramon",
+      "en": "Megadramon",
+      "zh": "機械飛龍獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "tyrannomon",
+        "devimon",
+        "airdramon",
+        "seadramon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 3000,
+          "mp": 5000,
+          "offense": 500,
+          "defense": 300,
+          "speed": 400,
+          "brains": 400
+        },
+        "weight": [
+          50,
+          60
+        ],
+        "care": {
+          "op": "lte",
+          "value": 10
+        },
+        "bonus": {
+          "battlesMin": 30,
+          "techs": 30
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "giromon",
+      "en": "Giromon",
+      "zh": "基羅獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "centarumon",
+        "ogremon",
+        "bakemon",
+        "unimon"
+      ],
+      "req": {
+        "stats": {
+          "offense": 400,
+          "speed": 300,
+          "brains": 400
+        },
+        "weight": [
+          0,
+          10
+        ],
+        "care": {
+          "op": "gte",
+          "value": 15
+        },
+        "bonus": {
+          "happiness": 95,
+          "battlesMin": 100,
+          "techs": 35
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "phoenixmon",
+      "en": "Phoenixmon",
+      "zh": "鳳凰獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "birdramon",
+        "angemon",
+        "airdramon",
+        "kokatorimon",
+        "unimon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 4000,
+          "mp": 4000,
+          "speed": 400,
+          "brains": 600
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 3
+        },
+        "bonus": {
+          "discipline": 100,
+          "battlesMax": 0,
+          "techs": 40
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "hkabuterimon",
+      "en": "H-Kabuterimon",
+      "zh": "赫拉克勒甲蟲獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "kabuterimon",
+        "kuwagamon",
+        "shellmon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 7000,
+          "offense": 400,
+          "defense": 600,
+          "speed": 400
+        },
+        "weight": [
+          50,
+          60
+        ],
+        "care": {
+          "op": "lte",
+          "value": 5
+        },
+        "bonus": {
+          "battlesMax": 0,
+          "techs": 40
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "piximon",
+      "en": "Piximon",
+      "zh": "妖精獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "kokatorimon",
+        "kuwagamon",
+        "vegiemon",
+        "ninjamon"
+      ],
+      "req": {
+        "stats": {
+          "offense": 300,
+          "defense": 300,
+          "speed": 400,
+          "brains": 400
+        },
+        "weight": [
+          0,
+          10
+        ],
+        "care": {
+          "op": "gte",
+          "value": 15
+        },
+        "bonus": {
+          "happiness": 95,
+          "techs": 25
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "metalmamemon",
+      "en": "MetalMamemon",
+      "zh": "金屬豆豆獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "monochromon",
+        "kabuterimon",
+        "ninjamon",
+        "frigimon"
+      ],
+      "req": {
+        "stats": {
+          "offense": 500,
+          "defense": 400,
+          "speed": 400,
+          "brains": 400
+        },
+        "weight": [
+          5,
+          15
+        ],
+        "care": {
+          "op": "lte",
+          "value": 15
+        },
+        "bonus": {
+          "happiness": 95,
+          "techs": 30
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "mamemon",
+      "en": "Mamemon",
+      "zh": "豆豆獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "leomon",
+        "ninjamon",
+        "whamon",
+        "frigimon",
+        "mojyamon"
+      ],
+      "req": {
+        "stats": {
+          "offense": 400,
+          "defense": 300,
+          "speed": 300,
+          "brains": 400
+        },
+        "weight": [
+          0,
+          10
+        ],
+        "care": {
+          "op": "gte",
+          "value": 15
+        },
+        "bonus": {
+          "happiness": 90,
+          "techs": 25
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "megaseadramon",
+      "en": "MegaSeadramon",
+      "zh": "超海龍獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "seadramon",
+        "whamon",
+        "shellmon",
+        "coelamon",
+        "garurumon"
+      ],
+      "req": {
+        "stats": {
+          "mp": 4000,
+          "offense": 500,
+          "defense": 400,
+          "brains": 400
+        },
+        "weight": [
+          25,
+          35
+        ],
+        "care": {
+          "op": "lte",
+          "value": 5
+        },
+        "bonus": {
+          "battlesMax": 0,
+          "techs": 40
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "monzaemon",
+      "en": "Monzaemon",
+      "zh": "熊仔獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "numemon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 3000,
+          "mp": 3000,
+          "offense": 300,
+          "defense": 300,
+          "speed": 300,
+          "brains": 300
+        },
+        "weight": [
+          35,
+          45
+        ],
+        "care": {
+          "op": "lte",
+          "value": 0
+        },
+        "bonus": {
+          "battlesMin": 50,
+          "techs": 49
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "vademon",
+      "en": "Vademon",
+      "zh": "Ｖ仔獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": []
+    },
+    {
+      "id": "digitamamon",
+      "en": "Digitamamon",
+      "zh": "數碼蛋獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "nanimon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 3000,
+          "mp": 3000,
+          "offense": 400,
+          "defense": 400,
+          "speed": 400,
+          "brains": 300
+        },
+        "weight": [
+          5,
+          15
+        ],
+        "care": {
+          "op": "lte",
+          "value": 0
+        },
+        "bonus": {
+          "battlesMin": 100,
+          "techs": 49
+        },
+        "timeHours": 144
+      }
+    },
+    {
+      "id": "etemon",
+      "en": "Etemon",
+      "zh": "艾特獸",
+      "stage": "ultimate",
+      "evolvesTo": [],
+      "evolvesFrom": [
+        "sukamon"
+      ],
+      "req": {
+        "stats": {
+          "hp": 2000,
+          "mp": 3000,
+          "offense": 400,
+          "defense": 200,
+          "speed": 400,
+          "brains": 300
+        },
+        "weight": [
+          10,
+          20
+        ],
+        "care": {
+          "op": "lte",
+          "value": 0
+        },
+        "bonus": {
+          "battlesMin": 50,
+          "techs": 49
+        },
+        "timeHours": 144
+      }
+    }
+  ],
+  "specials": [
+    {
+      "to": "sukamon",
+      "from": "any",
+      "condition": "病毒條（野屎）滿",
+      "note": "能力減半；可找屎屎王還原"
+    },
+    {
+      "to": "kunemon",
+      "from": "inTraining",
+      "condition": "在古內門床睡覺",
+      "note": "約 50%"
+    },
+    {
+      "to": "numemon",
+      "from": "rookie",
+      "condition": "成長期停留約 96 小時仍未自然進化",
+      "note": "能力約減 20%"
+    },
+    {
+      "to": "nanimon",
+      "from": "rookie",
+      "condition": "開心度 0、服從度 0 時罵牠",
+      "note": "無能力加成"
+    },
+    {
+      "to": "bakemon",
+      "from": "rookie",
+      "condition": "失去一命（企鵝獸除外）",
+      "note": "約 10%"
+    },
+    {
+      "to": "devimon",
+      "from": "angemon",
+      "condition": "服從度 ≤50 且失去一命",
+      "note": "約 50%"
+    },
+    {
+      "to": "airdramon",
+      "from": [
+        "seadramon",
+        "birdramon"
+      ],
+      "condition": "服從度 100、開心度 100、疲勞 0 時醒來",
+      "note": "約 30%"
+    },
+    {
+      "to": "coelamon",
+      "from": [
+        "whamon",
+        "shellmon"
+      ],
+      "condition": "進化計時剛好 200 小時時褒／罵",
+      "note": "約 30%；之後通常立刻進化超海龍獸"
+    },
+    {
+      "to": "ninjamon",
+      "from": "vegiemon",
+      "condition": "服從度 100 且勝場 ≥50 時睡覺",
+      "note": "約 30%"
+    },
+    {
+      "to": "monochromon",
+      "from": "drimogemon",
+      "condition": "服從度 100 且防禦 ≥500 時睡覺",
+      "note": "約 30%"
+    },
+    {
+      "to": "vademon",
+      "from": "champion",
+      "condition": "進化計時 ≥240 小時時褒／罵（360 小時強制）",
+      "note": "約 50%"
+    },
+    {
+      "to": "phoenixmon",
+      "from": "kokatorimon",
+      "condition": "失去一命",
+      "note": "約 10%"
+    },
+    {
+      "to": "monzaemon",
+      "from": "numemon",
+      "condition": "玩具鎮與熊仔獸服裝對話",
+      "note": "擊敗壞熊仔獸後失效"
+    },
+    {
+      "to": "skullgreymon",
+      "from": [
+        "metalgreymon",
+        "megadramon"
+      ],
+      "condition": "失去一命",
+      "note": "約 10%"
+    },
+    {
+      "to": "metalmamemon",
+      "from": "mamemon",
+      "condition": "工廠鎮最北房間找 Guardromon 付錢改造",
+      "note": "約 5/11 金屬豆豆、1/11 基羅"
+    }
+  ]
+}
